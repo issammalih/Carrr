@@ -1,0 +1,4196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto Youssef</title>
+  <meta name="description" content="Marketplace automobile premium avec assistant IA." />
+  <style>
+    html,body{margin:0;padding:0;background:#03050a;color:#fff;overflow-x:hidden;scroll-behavior:smooth;}
+    a{cursor:pointer;}
+  </style>
+</head>
+<body id="top">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#e53935;--dark:#03050a}
+
+.yab-wrap{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  background:var(--dark);
+}
+
+.yab{position:relative;width:100%;min-height:100vh;background:var(--dark);overflow:hidden;font-family:'Barlow',sans-serif}
+
+.yab-grid{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.18) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.18) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:gScroll 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.5) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.5) 55%,transparent 100%);z-index:1;pointer-events:none}
+@keyframes gScroll{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.yab-lines{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.yab-line{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(229,57,53,0.35) 40%,rgba(229,57,53,0.08) 70%,transparent);animation:lineAnim linear infinite;opacity:0}
+@keyframes lineAnim{0%{transform:translateY(-100%);opacity:0}15%{opacity:1}85%{opacity:0.4}100%{transform:translateY(100%);opacity:0}}
+
+.yab-orb1{position:absolute;width:700px;height:500px;background:radial-gradient(ellipse,rgba(229,57,53,0.16) 0%,transparent 70%);top:0;right:-10%;border-radius:50%;filter:blur(60px);animation:orb1 9s ease-in-out infinite;z-index:1;pointer-events:none}
+.yab-orb2{position:absolute;width:350px;height:350px;background:radial-gradient(ellipse,rgba(229,57,53,0.08) 0%,transparent 70%);bottom:10%;left:0;border-radius:50%;filter:blur(60px);animation:orb2 11s ease-in-out infinite;z-index:1;pointer-events:none}
+@keyframes orb1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,30px)}}
+@keyframes orb2{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
+
+/* CAR — animation float + drive-in */
+.yab-car{
+  position:absolute;
+  right:0;bottom:0;
+  width:60%;max-width:860px;
+  z-index:4;
+  opacity:0;
+  animation:carDriveIn 1.6s 0.3s cubic-bezier(0.16,1,0.3,1) forwards}
+.yab-car img{
+  width:100%;display:block;
+  filter:drop-shadow(-30px 0 80px rgba(229,57,53,0.55)) drop-shadow(0 0 40px rgba(229,57,53,0.25)) brightness(1.1) contrast(1.05) saturate(1.1);
+  animation:carFloat 4s 2s ease-in-out infinite}
+.yab-car-glow{position:absolute;bottom:-5px;left:5%;right:5%;height:50px;background:radial-gradient(ellipse,rgba(229,57,53,0.7) 0%,transparent 70%);filter:blur(12px);animation:cglow 3s ease-in-out infinite}
+@keyframes carDriveIn{
+  0%{opacity:0;transform:translateX(180px) scale(0.92)}
+  60%{opacity:1;transform:translateX(-15px) scale(1.01)}
+  80%{transform:translateX(8px) scale(0.995)}
+  100%{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes carFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-8px) rotate(0.3deg)}
+  75%{transform:translateY(-4px) rotate(-0.2deg)}}
+@keyframes cglow{0%,100%{opacity:0.5;transform:scaleX(0.85)}50%{opacity:1;transform:scaleX(1.15)}}
+
+.yab-pts{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.yab-pt{position:absolute;background:var(--red);border-radius:50%;animation:ptAnim linear infinite;opacity:0}
+@keyframes ptAnim{0%{transform:translateY(100vh);opacity:0}10%{opacity:0.9}90%{opacity:0.15}100%{transform:translateY(-60px) translateX(var(--dx));opacity:0}}
+
+.yab-hdr{position:relative;z-index:20;width:100%;max-width:1440px;margin:0 auto;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;animation:hdrin 0.9s cubic-bezier(0.34,1.56,0.64,1) both}
+@keyframes hdrin{from{opacity:0;transform:translateY(-28px)}to{opacity:1;transform:translateY(0)}}
+
+.yab-nav{display:flex;align-items:center;gap:28px}
+.yab-nav a,.yab-nav button{color:rgba(255,255,255,0.65);text-decoration:none;background:none;border:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s;position:relative;padding-bottom:2px}
+.yab-nav a::after,.yab-nav button::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--red);transform:scaleX(0);transition:transform 0.3s}
+.yab-nav a:hover,.yab-nav button:hover{color:#fff}
+.yab-nav a:hover::after,.yab-nav button:hover::after{transform:scaleX(1)}
+
+.yab-cta{background:var(--red);color:#fff;padding:11px 22px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;box-shadow:0 0 28px rgba(229,57,53,0.45);transition:all 0.3s;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%)}
+.yab-cta:hover{background:#f44;box-shadow:0 0 50px rgba(229,57,53,0.8);transform:translateY(-2px)}
+
+.yab-sb{position:relative;z-index:15;background:rgba(0,0,0,0.88);border-bottom:1px solid rgba(229,57,53,0.18);padding:14px 48px;display:none;backdrop-filter:blur(24px)}
+.yab-sb.on{display:block}
+.yab-sb-in{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;align-items:center}
+.yab-sb input,.yab-sb select{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:3px;padding:10px 14px;font-family:'Barlow',sans-serif;font-size:13px;color:#fff;outline:none;transition:border-color 0.2s;appearance:none;width:100%}
+.yab-sb input::placeholder{color:rgba(255,255,255,0.25)}
+.yab-sb input:focus,.yab-sb select:focus{border-color:var(--red)}
+.yab-sb select option{background:#0a0c15;color:#fff}
+.yab-sb button{background:var(--red);color:#fff;border:none;padding:10px 22px;cursor:pointer;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;transition:all 0.25s}
+.yab-sb button:hover{background:#f44;transform:translateY(-1px)}
+
+.yab-hero{position:relative;z-index:10;max-width:1440px;margin:0 auto;padding:44px 48px 90px;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center;min-height:calc(100vh - 120px)}
+
+.yab-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.28);padding:5px 14px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:#ff8a80;margin-bottom:22px;opacity:0;animation:badgeIn 0.6s 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards}
+@keyframes badgeIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+.yab-dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:dotBlink 1.4s infinite}
+@keyframes dotBlink{0%,100%{opacity:1}50%{opacity:0.15}}
+
+.yab-title{margin-bottom:18px;perspective:900px;perspective-origin:50% 100%}
+.yab-tl{display:block;font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,9.5vw,124px);line-height:0.87;letter-spacing:3px;opacity:0;transform:rotateX(-95deg) translateY(20px);transform-origin:bottom center;transform-style:preserve-3d;animation:t3d 0.8s cubic-bezier(0.34,1.3,0.64,1) forwards}
+.yab-tl:nth-child(1){color:#fff;animation-delay:0.55s}
+.yab-tl:nth-child(2){color:#fff;animation-delay:0.75s}
+.yab-tl:nth-child(3){color:var(--red);animation-delay:0.95s;text-shadow:0 6px 0 rgba(160,0,0,0.55),0 12px 0 rgba(100,0,0,0.3),0 0 60px rgba(229,57,53,0.6);animation:t3d 0.8s 0.95s cubic-bezier(0.34,1.3,0.64,1) forwards,redPulse 2.5s 1.8s ease-in-out infinite}
+@keyframes t3d{from{opacity:0;transform:rotateX(-95deg) translateY(20px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+@keyframes redPulse{0%,100%{text-shadow:0 6px 0 rgba(160,0,0,0.55),0 0 40px rgba(229,57,53,0.5)}50%{text-shadow:0 6px 0 rgba(180,0,0,0.7),0 0 90px rgba(229,57,53,0.9),0 0 130px rgba(229,57,53,0.3)}}
+
+.yab-sub{font-size:17px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.5);line-height:1.75;max-width:450px;margin-bottom:34px;opacity:0;animation:fup 0.7s 1.25s both}
+.yab-sub strong{color:rgba(255,255,255,0.9);font-weight:600;font-style:normal}
+
+.yab-stats{display:flex;gap:32px;margin-bottom:38px;opacity:0;animation:fup 0.7s 1.4s both}
+.yab-snum{font-family:'Bebas Neue',sans-serif;font-size:46px;line-height:1;color:#fff}
+.yab-snum em{color:var(--red);font-style:normal}
+.yab-slbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-top:3px}
+.yab-sdiv{width:1px;background:rgba(255,255,255,0.08);align-self:stretch}
+
+.yab-btns{display:flex;gap:14px;align-items:center;opacity:0;animation:fup 0.7s 1.55s both}
+.yab-btn1{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;padding:15px 30px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 35px rgba(229,57,53,0.45);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.yab-btn1:hover{transform:translateY(-5px) scale(1.04);box-shadow:0 0 70px rgba(229,57,53,0.85)}
+.yab-btn1 svg{transition:transform 0.3s}.yab-btn1:hover svg{transform:translateX(5px)}
+.yab-btn2{display:inline-flex;align-items:center;background:transparent;color:rgba(255,255,255,0.55);padding:14px 26px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,0.1);cursor:pointer;transition:all 0.3s}
+.yab-btn2:hover{border-color:var(--red);color:#fff;background:rgba(229,57,53,0.07);transform:translateY(-2px)}
+
+@keyframes fup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.yab-card{background:rgba(3,5,12,0.78);border:1px solid rgba(229,57,53,0.18);border-radius:3px;padding:30px 26px;backdrop-filter:blur(32px);box-shadow:0 50px 100px rgba(0,0,0,0.65),inset 0 0 0 1px rgba(229,57,53,0.06);animation:cdin 1s 0.9s both;position:relative;overflow:hidden}
+.yab-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red) 50%,transparent);animation:cscan 3.5s ease-in-out infinite}
+@keyframes cscan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+@keyframes cdin{from{opacity:0;transform:translateX(55px) scale(0.97)}to{opacity:1;transform:translateX(0) scale(1)}}
+
+.yab-cey{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.yab-cey::before{content:'';width:18px;height:1px;background:var(--red)}
+.yab-card h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:#fff;margin-bottom:4px;line-height:1.1}
+.yab-card>p{font-size:11.5px;color:rgba(255,255,255,0.32);margin-bottom:20px;line-height:1.6}
+
+.yab-form{display:flex;flex-direction:column;gap:9px}
+.yab-fw label{display:block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:4px}
+.yab-fw input,.yab-fw select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:2px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:13px;color:#fff;outline:none;transition:all 0.25s;appearance:none}
+.yab-fw input::placeholder{color:rgba(255,255,255,0.18)}
+.yab-fw input:focus,.yab-fw select:focus{border-color:rgba(229,57,53,0.6);background:rgba(229,57,53,0.04);box-shadow:0 0 0 3px rgba(229,57,53,0.08)}
+.yab-fw select option{background:#080b14;color:#fff}
+.yab-2c{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+.yab-sub-btn{background:var(--red);color:#fff;border:none;padding:12px;width:100%;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 8px 28px rgba(229,57,53,0.35);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)}
+.yab-sub-btn:hover{transform:translateY(-3px);box-shadow:0 14px 48px rgba(229,57,53,0.65)}
+
+@media(max-width:960px){
+  .yab-hero{grid-template-columns:1fr;padding:32px 24px 60px;gap:36px}
+  .yab-car{width:88%;right:0;bottom:0;opacity:0.15;z-index:2}
+  .yab-hdr{padding:16px 22px}
+  .yab-nav{display:none}
+  .yab-sb-in{grid-template-columns:1fr}
+  .yab-2c{grid-template-columns:1fr}
+  .yab-tl{font-size:clamp(56px,14vw,90px)}
+  .yab-stats{gap:20px}
+  .yab-snum{font-size:36px}
+}
+@media(max-width:480px){
+  .yab-hdr{padding:14px 16px}
+  .yab-hero{padding:24px 16px 50px}
+  .yab-btns{flex-direction:column;align-items:flex-start}
+  .yab-btn1,.yab-btn2{width:100%;justify-content:center}
+}
+</style>
+
+<div class="yab-wrap">
+<div class="yab">
+  <div class="yab-grid"></div>
+  <div class="yab-lines" id="yabL"></div>
+  <div class="yab-orb1"></div>
+  <div class="yab-orb2"></div>
+  <div class="yab-car">
+    <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ChatGPT_Image_29_avr._2026_21_25_11.png?v=1777494776" alt="Voiture"/>
+    <div class="yab-car-glow"></div>
+  </div>
+  <div class="yab-pts" id="yabP"></div>
+
+  <div class="yab-hdr">
+    <a href="#top" style="display:inline-block">
+      <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/SD.png?v=1775418885" alt="Youssef Auto" style="height:76px;filter:drop-shadow(0 0 24px rgba(229,57,53,0.5))"/>
+    </a>
+    <nav class="yab-nav">
+      <a href="#top">Accueil</a>
+      <button type="button" onclick="document.getElementById('yabSB').classList.toggle('on')">Recherche</button>
+      <a href="#avis">Avis</a>
+      <a href="#prix">Prix</a>
+    </nav>
+    <a href="#contact" class="yab-cta">Vendre votre voiture</a>
+  </div>
+
+  <div class="yab-sb" id="yabSB">
+    <div class="yab-sb-in">
+      <input type="text" placeholder="Rechercher une voiture..."/>
+      <select><option>Toutes marques</option><option>BMW</option><option>Mercedes</option><option>Audi</option><option>Renault</option><option>Peugeot</option><option>Toyota</option></select>
+      <select><option>Budget</option><option>− 10k €</option><option>10–20k €</option><option>20–35k €</option><option>35k+ €</option></select>
+      <button type="button">Chercher</button>
+    </div>
+  </div>
+
+  <div class="yab-hero">
+    <div>
+      <div class="yab-badge"><span class="yab-dot"></span>Marketplace Automobile N°1</div>
+      <div class="yab-title">
+        <span class="yab-tl">TROUVEZ</span>
+        <span class="yab-tl">VOTRE</span>
+        <span class="yab-tl">VOITURE</span>
+      </div>
+      <p class="yab-sub">La plateforme <strong>N°1 au Maroc</strong> pour acheter et vendre des véhicules premium. Annonces vérifiées, prix transparents.</p>
+      <div class="yab-stats">
+        <div><div class="yab-snum" id="sn1">0<em>+</em></div><div class="yab-slbl">Voitures</div></div>
+        <div class="yab-sdiv"></div>
+        <div><div class="yab-snum" id="sn2">0<em>k</em></div><div class="yab-slbl">Clients</div></div>
+        <div class="yab-sdiv"></div>
+        <div><div class="yab-snum" id="sn3">0<em>+</em></div><div class="yab-slbl">Marques</div></div>
+      </div>
+      <div class="yab-btns">
+        <a href="#" class="yab-btn1">
+          Voir les annonces
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="yab-btn2">Vendre ma voiture</a>
+      </div>
+    </div>
+
+    <div class="yab-card">
+      <div class="yab-cey">Recherche Rapide</div>
+      <h3>TROUVER MON<br>VÉHICULE</h3>
+      <p>Filtrez parmi des centaines d'annonces vérifiées.</p>
+      <div class="yab-form">
+        <div class="yab-fw"><label>Modèle recherché</label><input type="text" placeholder="Ex: BMW Série 3, Dacia Duster..."/></div>
+        <div class="yab-2c">
+          <div class="yab-fw"><label>Marque</label><select><option value="">Toutes</option><option>BMW</option><option>Mercedes</option><option>Audi</option><option>Renault</option><option>Peugeot</option><option>Toyota</option><option>Dacia</option></select></div>
+          <div class="yab-fw"><label>Budget</label><select><option value="">Tous</option><option>−10k €</option><option>10–20k €</option><option>20–35k €</option><option>35k+ €</option></select></div>
+        </div>
+        <div class="yab-2c">
+          <div class="yab-fw"><label>Année min</label><select><option value="">Toutes</option><option>2024</option><option>2022</option><option>2020</option><option>2018</option><option>2015</option></select></div>
+          <div class="yab-fw"><label>Carburant</label><select><option value="">Tous</option><option>Essence</option><option>Diesel</option><option>Hybride</option><option>Électrique</option></select></div>
+        </div>
+        <button class="yab-sub-btn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          Rechercher maintenant
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  var l=document.getElementById('yabL');
+  if(l){for(var i=0;i<14;i++){var el=document.createElement('div');el.className='yab-line';el.style.cssText='left:'+(Math.random()*100)+'%;animation-duration:'+(1.5+Math.random()*3)+'s;animation-delay:'+(Math.random()*6)+'s;opacity:'+(0.15+Math.random()*0.35);l.appendChild(el);}}
+})();
+(function(){
+  var p=document.getElementById('yabP');
+  if(p){for(var i=0;i<22;i++){var el=document.createElement('div');el.className='yab-pt';var s=1+Math.random()*2;el.style.cssText='left:'+(Math.random()*100)+'%;--dx:'+((Math.random()-0.5)*160)+'px;width:'+s+'px;height:'+s+'px;animation-duration:'+(8+Math.random()*10)+'s;animation-delay:'+(Math.random()*9)+'s;';p.appendChild(el);}}
+})();
+function cnt(el,t,s,d){if(!el)return;var n=0,step=t/(d/16);var tm=setInterval(function(){n+=step;if(n>=t){n=t;clearInterval(tm);}el.innerHTML=Math.floor(n)+'<em>'+s+'</em>';},16);}
+setTimeout(function(){cnt(document.getElementById('sn1'),500,'+',2000);cnt(document.getElementById('sn2'),12,'k',1500);cnt(document.getElementById('sn3'),40,'+',1800);},900);
+</script>
+
+
+<style>
+  .ya-brand-bar,
+  .ya-brand-bar * { box-sizing: border-box; }
+  .ya-brand-bar { width: 100vw; margin-left: calc(50% - 50vw); overflow: hidden; background: #000000; padding: 18px 0; }
+  .ya-brand-bar-track { display: flex; width: max-content; animation: yaBrandScroll 38s linear infinite; will-change: transform; }
+  .ya-brand-bar-row { display: flex; align-items: center; white-space: nowrap; }
+  .ya-brand-name { color: #ffffff; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; padding: 0 34px; flex-shrink: 0; }
+  .ya-brand-sep { color: #d93025; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+  .ya-brand-bar:hover .ya-brand-bar-track { animation-play-state: paused; }
+  @keyframes yaBrandScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 768px) { .ya-brand-bar { padding: 14px 0; } .ya-brand-bar-track { animation-duration: 26s; } .ya-brand-name { font-size: 14px; padding: 0 20px; letter-spacing: .5px; } .ya-brand-sep { font-size: 14px; } }
+</style>
+<section class="ya-brand-bar">
+  <div class="ya-brand-bar-track">
+    <div class="ya-brand-bar-row">
+      <span class="ya-brand-name">Vente de voitures</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Offres exclusives</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Véhicules premium</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Qualité garantie</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Achat sécurisé</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Meilleurs prix</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Livraison rapide</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Large sélection</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Modèles récents</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Service professionnel</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Voitures disponibles</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Conduisez votre rêve</span>
+    </div>
+    <div class="ya-brand-bar-row" aria-hidden="true">
+      <span class="ya-brand-name">Vente de voitures</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Offres exclusives</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Véhicules premium</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Qualité garantie</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Achat sécurisé</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Meilleurs prix</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Livraison rapide</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Large sélection</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Modèles récents</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Service professionnel</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Voitures disponibles</span><span class="ya-brand-sep">•</span><span class="ya-brand-name">Conduisez votre rêve</span>
+    </div>
+  </div>
+</section>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.yacs,.yacs *{box-sizing:border-box;margin:0;padding:0}
+
+.yacs-outer{margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;background:#03050a}
+
+.yacs{position:relative;width:100%;background:#03050a;padding:100px 40px;overflow:hidden;font-family:'Barlow',sans-serif}
+
+.yacs-grid-bg{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.12) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yacsGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yacsGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.yacs-orb1{position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(229,57,53,0.13) 0%,transparent 70%);top:-50px;right:-100px;border-radius:50%;filter:blur(70px);animation:yacsOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.yacs-orb2{position:absolute;width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.07) 0%,transparent 70%);bottom:10%;left:5%;border-radius:50%;filter:blur(70px);animation:yacsOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes yacsOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,25px)}}
+@keyframes yacsOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-20px)}}
+
+.yacs-wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+
+.yacs-head{text-align:center;margin-bottom:64px}
+.yacs-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.28);padding:5px 16px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff8a80;margin-bottom:20px;opacity:0;animation:yacsFadeUp 0.7s 0.2s both}
+.yacs-dot{width:5px;height:5px;border-radius:50%;background:#e53935;animation:yacsBlink 1.5s infinite}
+@keyframes yacsBlink{0%,100%{opacity:1}50%{opacity:0.1}}
+
+.yacs-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,90px);line-height:0.9;letter-spacing:2px;color:#fff;margin-bottom:10px;opacity:0;transform:rotateX(-90deg) translateY(20px);transform-origin:bottom center;animation:yacsT3d 0.9s 0.4s cubic-bezier(0.34,1.3,0.64,1) forwards}
+.yacs-title span{color:#e53935;text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 50px rgba(229,57,53,0.6);animation:yacsRedGlow 2.5s 1.4s ease-in-out infinite}
+@keyframes yacsT3d{from{opacity:0;transform:rotateX(-90deg) translateY(20px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+@keyframes yacsRedGlow{0%,100%{text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.5)}50%{text-shadow:0 4px 0 rgba(180,0,0,0.7),0 0 80px rgba(229,57,53,0.9)}}
+
+.yacs-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.4);letter-spacing:0.5px;opacity:0;animation:yacsFadeUp 0.7s 0.7s both}
+
+.yacs-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:24px}
+.yacs-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-bottom:24px}
+
+.yacs-card{position:relative;background:rgba(5,8,18,0.85);border:1px solid rgba(229,57,53,0.15);border-radius:4px;overflow:hidden;text-decoration:none;display:block;opacity:0;transform:translateY(60px) rotateX(-15deg) scale(0.94);transform-origin:bottom center;transition:transform 0.5s cubic-bezier(0.34,1.4,0.64,1),box-shadow 0.4s,border-color 0.3s;animation:yacsCardPop 1s cubic-bezier(0.34,1.3,0.64,1) both;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.yacs-grid3 .yacs-card:nth-child(1){animation-delay:0.5s}
+.yacs-grid3 .yacs-card:nth-child(2){animation-delay:0.7s}
+.yacs-grid3 .yacs-card:nth-child(3){animation-delay:0.9s}
+.yacs-grid2 .yacs-card:nth-child(1){animation-delay:1.0s}
+.yacs-grid2 .yacs-card:nth-child(2){animation-delay:1.2s}
+.yacs-grid2b .yacs-card:nth-child(1){animation-delay:1.3s}
+.yacs-grid2b .yacs-card:nth-child(2){animation-delay:1.5s}
+@keyframes yacsCardPop{0%{opacity:0;transform:translateY(80px) rotateX(-20deg) scale(0.9)}60%{transform:translateY(-8px) rotateX(2deg) scale(1.01)}80%{transform:translateY(4px) rotateX(-1deg) scale(0.995)}100%{opacity:1;transform:translateY(0) rotateX(0) scale(1)}}
+
+.yacs-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.8),transparent);animation:yacsScan 4s ease-in-out infinite;z-index:10}
+@keyframes yacsScan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+
+.yacs-card:hover{transform:translateY(-14px) scale(1.025)!important;border-color:rgba(229,57,53,0.5);box-shadow:0 40px 90px rgba(0,0,0,0.7),0 0 50px rgba(229,57,53,0.18)}
+
+.yacs-media{position:relative;aspect-ratio:16/10;background:#000;overflow:hidden}
+.yacs-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(3,5,10,0.95) 0%,rgba(3,5,10,0.3) 50%,transparent 100%);z-index:3;pointer-events:none}
+
+.ya-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;visibility:hidden;transition:opacity 1.2s ease-in-out;z-index:1}
+.ya-slide.active{opacity:1;visibility:visible;z-index:2}
+.yacs-card:hover .ya-slide.active{transform:scale(1.06);transition:opacity 1.2s ease-in-out,transform 0.6s ease}
+
+.yacs-badge{position:absolute;top:14px;right:14px;background:#e53935;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:5px 12px;border-radius:2px;z-index:10;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);box-shadow:0 0 20px rgba(229,57,53,0.6)}
+.yacs-price{position:absolute;left:14px;bottom:14px;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:#fff;z-index:10;text-shadow:0 2px 0 rgba(229,57,53,0.5),0 0 20px rgba(229,57,53,0.4)}
+
+.yacs-body{padding:20px 18px 18px;position:relative;z-index:5;background:rgba(5,8,18,0.95)}
+.yacs-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:#fff;margin-bottom:14px;transition:color 0.3s}
+.yacs-card:hover .yacs-name{color:#ff8a80}
+
+.yacs-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;list-style:none;padding:0}
+.yacs-meta li{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:8px 10px;transition:border-color 0.3s}
+.yacs-card:hover .yacs-meta li{border-color:rgba(229,57,53,0.15)}
+.yacs-meta strong{display:block;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:3px}
+.yacs-meta span{font-size:13px;font-weight:600;color:#fff}
+
+.yacs-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px}
+.yacs-link{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e53935;display:flex;align-items:center;gap:6px;transition:gap 0.3s,letter-spacing 0.3s}
+.yacs-card:hover .yacs-link{gap:12px;letter-spacing:3px}
+.yacs-arrow{width:34px;height:34px;border-radius:2px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.25);display:flex;align-items:center;justify-content:center;color:#e53935;font-size:14px;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.yacs-card:hover .yacs-arrow{background:#e53935;color:#fff;transform:scale(1.2);box-shadow:0 0 24px rgba(229,57,53,0.6)}
+
+.yacs-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.25),transparent);margin:50px 0}
+
+.yacs-cta-wrap{text-align:center;margin-top:60px;opacity:0;animation:yacsFadeUp 0.7s 1.6s both}
+.yacs-cta{display:inline-flex;align-items:center;gap:10px;background:#e53935;color:#fff;padding:16px 38px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;box-shadow:0 0 40px rgba(229,57,53,0.4);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.yacs-cta:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 0 70px rgba(229,57,53,0.8)}
+.yacs-cta svg{transition:transform 0.3s}
+.yacs-cta:hover svg{transform:translateX(6px)}
+
+.yacs-grid2b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-bottom:24px}
+
+@keyframes yacsFadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1024px){.yacs-grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){
+  .yacs-grid3,.yacs-grid2,.yacs-grid2b{grid-template-columns:1fr}
+  .yacs{padding:70px 16px}
+  .yacs-title{font-size:52px}}
+</style>
+
+<div id="cars"></div>
+<div class="yacs-outer">
+<section class="yacs">
+  <div class="yacs-grid-bg"></div>
+  <div class="yacs-orb1"></div>
+  <div class="yacs-orb2"></div>
+
+  <div class="yacs-wrap">
+
+    <div class="yacs-head">
+      <div class="yacs-tag"><span class="yacs-dot"></span>Stock Disponible</div>
+      <h2 class="yacs-title">NOS <span>VOITURES</span><br>DISPONIBLES</h2>
+      <p class="yacs-sub">Des véhicules premium vérifiés — prix transparents, qualité garantie</p>
+    </div>
+
+    <!-- GRID 3 COLS -->
+    <div class="yacs-grid3">
+      <a class="yacs-card" href="#contact">
+        <div class="yacs-media">
+          <div class="ya-slider-container">
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_yl6sduyl6sduyl6s.png?v=1775442062" class="ya-slide active" alt="Range Rover"/>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_gj103jgj103jgj10.png?v=1775442062" class="ya-slide" alt="Range Rover"/>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_5nvk3c5nvk3c5nvk.png?v=1775442062" class="ya-slide" alt="Range Rover"/>
+          </div>
+          <span class="yacs-badge">Nouveau</span>
+          <span class="yacs-price">25 000 €</span>
+        </div>
+        <div class="yacs-body">
+          <h3 class="yacs-name">Range Rover</h3>
+          <ul class="yacs-meta">
+            <li><strong>Année</strong><span>2022</span></li>
+            <li><strong>Boîte</strong><span>Auto</span></li>
+            <li><strong>Carburant</strong><span>Diesel</span></li>
+            <li><strong>KM</strong><span>45 000</span></li>
+          </ul>
+          <div class="yacs-footer">
+            <span class="yacs-link">Voir la voiture →</span>
+            <span class="yacs-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yacs-card" href="#contact">
+        <div class="yacs-media">
+          <div class="ya-slider-container">
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_8qm5uz8qm5uz8qm5.png?v=1775442900" class="ya-slide active" alt="Mercedes"/>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_peo07vpeo07vpeo0.png?v=1775442906" class="ya-slide" alt="Mercedes"/>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_6l9s0f6l9s0f6l9s.png?v=1775442899" class="ya-slide" alt="Mercedes"/>
+          </div>
+          <span class="yacs-badge">Promo</span>
+          <span class="yacs-price">31 500 €</span>
+        </div>
+        <div class="yacs-body">
+          <h3 class="yacs-name">Mercedes A 130</h3>
+          <ul class="yacs-meta">
+            <li><strong>Année</strong><span>2021</span></li>
+            <li><strong>Boîte</strong><span>Auto</span></li>
+            <li><strong>Carburant</strong><span>Essence</span></li>
+            <li><strong>KM</strong><span>32 000</span></li>
+          </ul>
+          <div class="yacs-footer">
+            <span class="yacs-link">Voir la voiture →</span>
+            <span class="yacs-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yacs-card" href="#contact">
+        <div class="yacs-media">
+          <div class="ya-slider-container">
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Gemini_Generated_Image_yl6sduyl6sduyl6s.png?v=1775442062" class="ya-slide active" alt="BMW"/>
+          </div>
+          <span class="yacs-badge">Exclusif</span>
+          <span class="yacs-price">44 000 €</span>
+        </div>
+        <div class="yacs-body">
+          <h3 class="yacs-name">BMW Série 5</h3>
+          <ul class="yacs-meta">
+            <li><strong>Année</strong><span>2023</span></li>
+            <li><strong>Boîte</strong><span>Auto</span></li>
+            <li><strong>Carburant</strong><span>Hybride</span></li>
+            <li><strong>KM</strong><span>12 000</span></li>
+          </ul>
+          <div class="yacs-footer">
+            <span class="yacs-link">Voir la voiture →</span>
+            <span class="yacs-arrow">→</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="yacs-sep"></div>
+
+    <!-- GRID 2 COLS — Jeep + Volkswagen -->
+    <div class="yacs-grid2">
+      <a class="yacs-card" href="#contact">
+        <div class="yacs-media">
+          <div class="ya-slider-container">
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/JEEEEP.jpg?v=1775469854" class="ya-slide active" alt="Jeep"/>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/JEEEEEEEP.avif?v=1775469854" class="ya-slide" alt="Jeep"/>
+          </div>
+          <span class="yacs-badge">Nouveau</span>
+          <span class="yacs-price">Sur Devis</span>
+        </div>
+        <div class="yacs-body">
+          <h3 class="yacs-name">Jeep</h3>
+          <ul class="yacs-meta">
+            <li><strong>Catégorie</strong><span>4x4 SUV</span></li>
+            <li><strong>Boîte</strong><span>Automatique</span></li>
+            <li><strong>Carburant</strong><span>Diesel</span></li>
+            <li><strong>KM</strong><span>Sur Devis</span></li>
+          </ul>
+          <div class="yacs-footer">
+            <span class="yacs-link">Voir la voiture →</span>
+            <span class="yacs-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yacs-card" href="#contact">
+        <div class="yacs-media">
+          <div class="ya-slider-container">
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/wolkswakennnn.jpg?v=1775469903" class="ya-slide active" alt="Volkswagen"/>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/volkswakenn.jpg?v=1775469903" class="ya-slide" alt="Volkswagen"/>
+          </div>
+          <span class="yacs-badge">Promo</span>
+          <span class="yacs-price">28 500 €</span>
+        </div>
+        <div class="yacs-body">
+          <h3 class="yacs-name">Volkswagen</h3>
+          <ul class="yacs-meta">
+            <li><strong>Modèle</strong><span>Golf / Polo</span></li>
+            <li><strong>Boîte</strong><span>Manuelle / Auto</span></li>
+            <li><strong>Carburant</strong><span>Essence</span></li>
+            <li><strong>KM</strong><span>28 000</span></li>
+          </ul>
+          <div class="yacs-footer">
+            <span class="yacs-link">Voir la voiture →</span>
+            <span class="yacs-arrow">→</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="yacs-cta-wrap">
+      <a href="#contact" class="yacs-cta">
+        Voir toutes nos voitures
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  function startSliders(){
+    var containers=document.querySelectorAll('.ya-slider-container');
+    containers.forEach(function(c){
+      var slides=c.querySelectorAll('.ya-slide');
+      var idx=0;
+      if(slides.length>1){
+        setInterval(function(){
+          slides[idx].classList.remove('active');
+          idx=(idx+1)%slides.length;
+          slides[idx].classList.add('active');
+        },3000);
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',startSliders);
+  } else {
+    startSliders();
+  }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.yash,.yash *{box-sizing:border-box;margin:0;padding:0}
+
+.yash-outer{margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;background:#03050a;position:relative;overflow:hidden}
+
+/* VELOCITY GRID */
+.yash-grid-bg{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.12) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yashGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yashGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.yash-orb1{position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(229,57,53,0.13) 0%,transparent 70%);top:0;right:-100px;border-radius:50%;filter:blur(70px);animation:yashOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.yash-orb2{position:absolute;width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.07) 0%,transparent 70%);bottom:10%;left:5%;border-radius:50%;filter:blur(70px);animation:yashOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes yashOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,25px)}}
+@keyframes yashOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-20px)}}
+
+.yash{position:relative;z-index:2;padding:100px 0 80px;font-family:'Barlow',sans-serif}
+
+/* HEAD */
+.yash-head{max-width:1280px;margin:0 auto 48px;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+.yash-head-left{}
+.yash-kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.28);padding:5px 14px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff8a80;margin-bottom:16px;opacity:0;animation:yashFadeUp 0.7s 0.2s both}
+.yash-kdot{width:5px;height:5px;border-radius:50%;background:#e53935;animation:yashBlink 1.5s infinite}
+@keyframes yashBlink{0%,100%{opacity:1}50%{opacity:0.1}}
+
+.yash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,80px);line-height:0.9;letter-spacing:2px;color:#fff;margin-bottom:10px;opacity:0;transform:rotateX(-90deg) translateY(20px);transform-origin:bottom center;animation:yashT3d 0.9s 0.4s cubic-bezier(0.34,1.3,0.64,1) forwards}
+.yash-title span{color:#e53935;text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 50px rgba(229,57,53,0.6);animation:yashGlow 2.5s 1.4s ease-in-out infinite}
+@keyframes yashT3d{from{opacity:0;transform:rotateX(-90deg) translateY(20px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+@keyframes yashGlow{0%,100%{text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.5)}50%{text-shadow:0 4px 0 rgba(180,0,0,0.7),0 0 80px rgba(229,57,53,0.9)}}
+
+.yash-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.35);letter-spacing:0.5px;opacity:0;animation:yashFadeUp 0.7s 0.7s both}
+
+.yash-voir{display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.1);padding:11px 22px;font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all 0.3s;white-space:nowrap;opacity:0;animation:yashFadeUp 0.7s 0.8s both}
+.yash-voir:hover{border-color:var(--red,#e53935);color:#fff;background:rgba(229,57,53,0.08);transform:translateY(-2px)}
+.yash-voir svg{transition:transform 0.3s}
+.yash-voir:hover svg{transform:translateX(4px)}
+
+/* SLIDER */
+.yash-slider{display:flex;gap:20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 40px 30px;cursor:grab;scrollbar-width:none}
+.yash-slider:active{cursor:grabbing}
+.yash-slider::-webkit-scrollbar{display:none}
+
+/* CARD — different design: tall + number */
+.yash-card{
+  flex:0 0 300px;
+  scroll-snap-align:start;
+  position:relative;
+  background:rgba(5,8,18,0.8);
+  border:1px solid rgba(229,57,53,0.12);
+  border-radius:3px;
+  overflow:hidden;
+  text-decoration:none;
+  opacity:0;
+  transform:translateY(50px) scale(0.93);
+  animation:yashCardIn 0.8s cubic-bezier(0.34,1.3,0.64,1) both;
+  transition:transform 0.4s cubic-bezier(0.34,1.4,0.64,1),border-color 0.3s,box-shadow 0.4s;
+  backdrop-filter:blur(16px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+.yash-card:nth-child(1){animation-delay:0.4s}
+.yash-card:nth-child(2){animation-delay:0.52s}
+.yash-card:nth-child(3){animation-delay:0.64s}
+.yash-card:nth-child(4){animation-delay:0.76s}
+.yash-card:nth-child(5){animation-delay:0.88s}
+.yash-card:nth-child(6){animation-delay:1.0s}
+.yash-card:nth-child(7){animation-delay:1.12s}
+.yash-card:nth-child(8){animation-delay:1.24s}
+.yash-card:nth-child(9){animation-delay:1.36s}
+.yash-card:nth-child(10){animation-delay:1.48s}
+@keyframes yashCardIn{from{opacity:0;transform:translateY(50px) scale(0.93)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.yash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.7),transparent);animation:yashScan 4s ease-in-out infinite;z-index:10}
+@keyframes yashScan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+
+.yash-card:hover{transform:translateY(-14px) scale(1.02)!important;border-color:rgba(229,57,53,0.45);box-shadow:0 35px 80px rgba(0,0,0,0.65),0 0 40px rgba(229,57,53,0.15)}
+
+/* MEDIA */
+.yash-media{position:relative;height:200px;background:#000;overflow:hidden}
+.yash-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.yash-card:hover .yash-media img{transform:scale(1.08)}
+.yash-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(3,5,10,1) 0%,rgba(3,5,10,0.4) 50%,transparent 100%);z-index:2;pointer-events:none}
+
+/* NUMBER — design different */
+.yash-num{
+  position:absolute;top:12px;left:12px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:3px;
+  color:rgba(255,255,255,0.5);
+  z-index:10;
+  background:rgba(0,0,0,0.5);
+  padding:4px 8px;border-radius:2px;
+  border:1px solid rgba(255,255,255,0.08)}
+
+/* TAG */
+.yash-tag{
+  position:absolute;top:12px;right:12px;
+  background:#e53935;color:#fff;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:2px;
+  padding:4px 10px;border-radius:2px;
+  z-index:10;
+  clip-path:polygon(3px 0%,100% 0%,calc(100% - 3px) 100%,0% 100%)}
+
+/* PRICE over image bottom */
+.yash-price-over{
+  position:absolute;bottom:12px;left:12px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;letter-spacing:2px;
+  color:#fff;z-index:10;
+  text-shadow:0 2px 0 rgba(229,57,53,0.5),0 0 20px rgba(229,57,53,0.4)}
+
+/* BODY */
+.yash-body{padding:16px 16px 18px;background:rgba(5,8,18,0.95)}
+
+.yash-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:3px;transition:color 0.3s}
+.yash-card:hover .yash-name{color:#ff8a80}
+
+.yash-model{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:14px}
+
+/* SPECS ROW */
+.yash-specs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.yash-spec{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:2px;padding:5px 8px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.35);transition:border-color 0.3s}
+.yash-card:hover .yash-spec{border-color:rgba(229,57,53,0.15)}
+
+/* FOOTER */
+.yash-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px}
+.yash-cta-txt{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e53935;transition:letter-spacing 0.3s}
+.yash-card:hover .yash-cta-txt{letter-spacing:3px}
+.yash-arrow{width:30px;height:30px;border-radius:2px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.2);display:flex;align-items:center;justify-content:center;color:#e53935;font-size:13px;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.yash-card:hover .yash-arrow{background:#e53935;color:#fff;transform:scale(1.2);box-shadow:0 0 20px rgba(229,57,53,0.5)}
+
+/* DRAG HINT */
+.yash-drag{text-align:center;padding-top:10px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.15);opacity:0;animation:yashFadeUp 0.7s 1.6s both}
+
+@keyframes yashFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:640px){
+  .yash-head{padding:0 16px;flex-direction:column;align-items:flex-start}
+  .yash-slider{padding:0 16px 24px}
+  .yash-card{flex:0 0 260px}
+  .yash-title{font-size:48px}}
+</style>
+
+<div class="yash-outer">
+  <div class="yash-grid-bg"></div>
+  <div class="yash-orb1"></div>
+  <div class="yash-orb2"></div>
+
+  <div class="yash">
+
+    <div class="yash-head">
+      <div class="yash-head-left">
+        <div class="yash-kicker"><span class="yash-kdot"></span>Collection Premium</div>
+        <h2 class="yash-title">EXPLOREZ NOS<br><span>VÉHICULES</span></h2>
+        <p class="yash-desc">Faites glisser pour découvrir nos modèles d'exception</p>
+      </div>
+      <a href="#cars" class="yash-voir">
+        Voir tout
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="yash-slider" id="yashSlider">
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">01</span>
+          <span class="yash-tag">Sport</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Audi_S5_sous_la_lumiere_doree.png?v=1775505804" alt="Audi S5"/>
+          <div class="yash-price-over">65 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Audi S5</h3>
+          <p class="yash-model">Édition Lumière Dorée</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">Essence</span>
+            <span class="yash-spec">2023</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">02</span>
+          <span class="yash-tag">Berline</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/BMW_3_Series_sous_le_soleil_d_or.png?v=1775505842" alt="BMW 3 Series"/>
+          <div class="yash-price-over">54 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">BMW 3 Series</h3>
+          <p class="yash-model">Soleil d'Or Edition</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">Diesel</span>
+            <span class="yash-spec">2022</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">03</span>
+          <span class="yash-tag">SUV Luxe</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Cadillac_Escalade_sous_le_soleil_couchant.png?v=1775505841" alt="Cadillac Escalade"/>
+          <div class="yash-price-over">110 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Cadillac Escalade</h3>
+          <p class="yash-model">Sunset Luxury</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">V8</span>
+            <span class="yash-spec">2023</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">04</span>
+          <span class="yash-tag">Performance</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/BMW_M3_Comp_sous_le_soleil_couchant_1.png?v=1775505840" alt="BMW M3"/>
+          <div class="yash-price-over">92 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">BMW M3 Comp</h3>
+          <p class="yash-model">Competition Package</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">Essence</span>
+            <span class="yash-spec">2023</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">05</span>
+          <span class="yash-tag">Exclusive</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ChatGPT_Image_6_avr._2026_21_02_18.png?v=1775505840" alt="Concept"/>
+          <div class="yash-price-over">88 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Modern Vision</h3>
+          <p class="yash-model">Futuristic Design</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">Hybride</span>
+            <span class="yash-spec">2024</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">06</span>
+          <span class="yash-tag">Sport</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/BMW_M3_Comp_sous_le_soleil_couchant.png?v=1775505842" alt="BMW M3 Edition"/>
+          <div class="yash-price-over">95 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">BMW M3 Edition</h3>
+          <p class="yash-model">Sunset Performance</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">Essence</span>
+            <span class="yash-spec">2022</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">07</span>
+          <span class="yash-tag">Muscle Car</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Dodge_Charger_SRT_Hellcat_sous_le_soleil_1.png?v=1775505840" alt="Charger Hellcat"/>
+          <div class="yash-price-over">78 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Charger Hellcat</h3>
+          <p class="yash-model">SRT Power V8</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">V8</span>
+            <span class="yash-spec">2022</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">08</span>
+          <span class="yash-tag">Muscle Car</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Dodge_Charger_SRT_Hellcat_sous_le_soleil.png?v=1775505840" alt="Hellcat SRT"/>
+          <div class="yash-price-over">82 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Hellcat SRT</h3>
+          <p class="yash-model">Extreme Edition</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">V8</span>
+            <span class="yash-spec">2023</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">09</span>
+          <span class="yash-tag">Muscle Car</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Dodge_Charger_SRT_Hellcat_sous_le_soleil_2.png?v=1775505840" alt="Charger Black"/>
+          <div class="yash-price-over">85 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Charger Black SRT</h3>
+          <p class="yash-model">Stealth Edition</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">V8</span>
+            <span class="yash-spec">2023</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="yash-card" href="#">
+        <div class="yash-media">
+          <span class="yash-num">10</span>
+          <span class="yash-tag">Muscle Car</span>
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Dodge_Charger_SRT_Hellcat_sous_le_soleil_3.png?v=1775505839" alt="Hellcat Final"/>
+          <div class="yash-price-over">89 000 €</div>
+        </div>
+        <div class="yash-body">
+          <h3 class="yash-name">Hellcat Final</h3>
+          <p class="yash-model">Ultimate Series</p>
+          <div class="yash-specs">
+            <span class="yash-spec">Auto</span>
+            <span class="yash-spec">V8</span>
+            <span class="yash-spec">2024</span>
+          </div>
+          <div class="yash-footer">
+            <span class="yash-cta-txt">Voir détails →</span>
+            <span class="yash-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="yash-drag">← Faites glisser pour explorer →</div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var slider=document.getElementById('yashSlider');
+  if(!slider)return;
+  var isDown=false,startX,scrollLeft;
+  slider.addEventListener('mousedown',function(e){
+    isDown=true;slider.style.cursor='grabbing';
+    startX=e.pageX-slider.offsetLeft;
+    scrollLeft=slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave',function(){isDown=false;slider.style.cursor='grab'});
+  slider.addEventListener('mouseup',function(){isDown=false;slider.style.cursor='grab'});
+  slider.addEventListener('mousemove',function(e){
+    if(!isDown)return;
+    e.preventDefault();
+    var x=e.pageX-slider.offsetLeft;
+    var walk=(x-startX)*1.5;
+    slider.scrollLeft=scrollLeft-walk;
+  });
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.yacf,.yacf *{box-sizing:border-box;margin:0;padding:0}
+
+.yacf-outer{margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;background:#03050a;position:relative;overflow:hidden}
+
+/* VELOCITY GRID */
+.yacf-grid-bg{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.12) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yacfGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yacfGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+/* FLOATING PARTICLES */
+.yacf-particles{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.yacf-pt{position:absolute;border-radius:50%;animation:yacfPt linear infinite;opacity:0}
+@keyframes yacfPt{0%{transform:translateY(100%) translateX(0);opacity:0}10%{opacity:0.8}90%{opacity:0.1}100%{transform:translateY(-60px) translateX(var(--dx));opacity:0}}
+
+/* FLOATING SHAPES */
+.yacf-shape{position:absolute;border:1px solid rgba(229,57,53,0.12);border-radius:50%;pointer-events:none;z-index:1}
+.yacf-shape1{width:300px;height:300px;top:10%;right:5%;animation:yacfRotate 20s linear infinite,yacfFloatS 8s ease-in-out infinite}
+.yacf-shape2{width:180px;height:180px;bottom:15%;left:8%;animation:yacfRotate 15s linear infinite reverse,yacfFloatS2 10s ease-in-out infinite}
+.yacf-shape3{width:80px;height:80px;top:50%;right:20%;border-color:rgba(229,57,53,0.08);animation:yacfRotate 8s linear infinite}
+@keyframes yacfRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes yacfFloatS{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(-20px,15px) rotate(180deg)}}
+@keyframes yacfFloatS2{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(15px,-20px) rotate(180deg)}}
+
+/* SCAN LINES */
+.yacf-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15),transparent);pointer-events:none;z-index:1;animation:yacfScanMove 6s ease-in-out infinite}
+.yacf-scan2{animation-delay:3s;opacity:0.5}
+@keyframes yacfScanMove{0%{top:0%;opacity:0}10%{opacity:1}90%{opacity:0.5}100%{top:100%;opacity:0}}
+
+/* ORB */
+.yacf-orb1{position:absolute;width:500px;height:500px;background:radial-gradient(ellipse,rgba(229,57,53,0.1) 0%,transparent 70%);top:-100px;right:-50px;border-radius:50%;filter:blur(60px);animation:yacfOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.yacf-orb2{position:absolute;width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.06) 0%,transparent 70%);bottom:5%;left:0;border-radius:50%;filter:blur(60px);animation:yacfOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes yacfOrb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,20px) scale(1.1)}}
+@keyframes yacfOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-25px)}}
+
+/* SECTION */
+.yacf{position:relative;z-index:2;padding:100px 40px;font-family:'Barlow',sans-serif;max-width:1180px;margin:0 auto}
+
+.yacf-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:60px;align-items:center}
+
+/* VISUAL LEFT */
+.yacf-visual{display:flex;flex-direction:column;gap:20px}
+
+/* Main image — reveal from left */
+.yacf-main-img{
+  position:relative;border-radius:4px;overflow:hidden;
+  background:#000;
+  opacity:0;transform:translateX(-60px) scale(0.95);
+  transition:opacity 0.9s cubic-bezier(0.34,1.2,0.64,1),transform 0.9s cubic-bezier(0.34,1.2,0.64,1)}
+.yacf-main-img.vis{opacity:1;transform:translateX(0) scale(1)}
+.yacf-main-img img{width:100%;height:330px;object-fit:cover;display:block;transition:transform 0.6s ease}
+.yacf-main-img:hover img{transform:scale(1.04)}
+.yacf-main-img::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.8),transparent);animation:yacfImgScan 3s ease-in-out infinite;z-index:5}
+@keyframes yacfImgScan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+
+/* Floating card inside image */
+.yacf-float{
+  position:absolute;left:16px;bottom:16px;
+  background:rgba(3,5,10,0.88);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(229,57,53,0.2);
+  border-radius:3px;padding:14px 16px;
+  color:#fff;z-index:10;
+  max-width:300px;
+  opacity:0;transform:translateY(20px) scale(0.9);
+  transition:opacity 0.7s 0.6s cubic-bezier(0.34,1.56,0.64,1),transform 0.7s 0.6s cubic-bezier(0.34,1.56,0.64,1)}
+.yacf-main-img.vis .yacf-float{opacity:1;transform:translateY(0) scale(1)}
+.yacf-float::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.5),transparent)}
+.yacf-float h3{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;margin-bottom:5px}
+.yacf-float p{font-size:11.5px;color:rgba(255,255,255,0.55);line-height:1.6;font-weight:300}
+
+/* Small image */
+.yacf-small-img{
+  border-radius:4px;overflow:hidden;
+  background:#000;
+  opacity:0;transform:translateX(-40px) translateY(20px);
+  transition:opacity 0.8s 0.2s cubic-bezier(0.34,1.2,0.64,1),transform 0.8s 0.2s cubic-bezier(0.34,1.2,0.64,1)}
+.yacf-small-img.vis{opacity:1;transform:translateX(0) translateY(0)}
+.yacf-small-img img{width:100%;height:220px;object-fit:cover;display:block;transition:transform 0.6s ease}
+.yacf-small-img:hover img{transform:scale(1.04)}
+
+/* Image border glow */
+.yacf-main-img,.yacf-small-img{border:1px solid rgba(229,57,53,0.15);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.yacf-main-img:hover,.yacf-small-img:hover{border-color:rgba(229,57,53,0.3);box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 30px rgba(229,57,53,0.1)}
+
+/* CONTENT RIGHT */
+.yacf-content{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+
+.yacf-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.28);
+  padding:5px 14px;border-radius:2px;
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:#ff8a80;
+  opacity:0;transform:translateX(30px);
+  transition:opacity 0.6s 0.1s both,transform 0.6s 0.1s cubic-bezier(0.34,1.56,0.64,1)}
+.yacf-badge.vis{opacity:1;transform:translateX(0)}
+.yacf-bdot{width:5px;height:5px;border-radius:50%;background:#e53935;animation:yacfBlink 1.5s infinite}
+@keyframes yacfBlink{0%,100%{opacity:1}50%{opacity:0.1}}
+
+.yacf-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(38px,5vw,64px);
+  line-height:0.9;letter-spacing:2px;
+  color:#fff;
+  opacity:0;transform:rotateX(-90deg) translateY(20px);
+  transform-origin:bottom center;
+  transition:opacity 0.8s 0.25s,transform 0.8s 0.25s cubic-bezier(0.34,1.3,0.64,1)}
+.yacf-title.vis{opacity:1;transform:rotateX(0) translateY(0)}
+.yacf-title span{
+  color:#e53935;
+  text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.6);
+  animation:yacfGlow 2.5s 1.5s ease-in-out infinite}
+@keyframes yacfGlow{0%,100%{text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.5)}50%{text-shadow:0 4px 0 rgba(180,0,0,0.7),0 0 80px rgba(229,57,53,0.9)}}
+
+.yacf-desc{
+  font-size:14px;font-weight:300;
+  color:rgba(255,255,255,0.45);line-height:1.8;
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.7s 0.4s,transform 0.7s 0.4s cubic-bezier(0.34,1.2,0.64,1)}
+.yacf-desc.vis{opacity:1;transform:translateY(0)}
+
+/* POINTS */
+.yacf-points{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;width:100%}
+.yacf-pt-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:3px;padding:12px 14px;
+  opacity:0;transform:translateX(30px);
+  transition:border-color 0.3s,background 0.3s}
+.yacf-pt-item.vis{animation:yacfPtIn 0.6s cubic-bezier(0.34,1.3,0.64,1) forwards}
+.yacf-pt-item:nth-child(1){animation-delay:0.5s}
+.yacf-pt-item:nth-child(2){animation-delay:0.65s}
+.yacf-pt-item:nth-child(3){animation-delay:0.8s}
+@keyframes yacfPtIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.yacf-pt-item:hover{border-color:rgba(229,57,53,0.2);background:rgba(229,57,53,0.04)}
+
+.yacf-pt-icon{
+  width:28px;height:28px;min-width:28px;
+  border-radius:2px;
+  background:rgba(229,57,53,0.1);
+  border:1px solid rgba(229,57,53,0.2);
+  display:flex;align-items:center;justify-content:center;
+  color:#e53935;font-size:12px;margin-top:1px}
+.yacf-pt-txt{font-size:13px;font-weight:600;color:#fff;line-height:1.5}
+.yacf-pt-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,0.35);margin-top:2px;line-height:1.5}
+
+/* BUTTON */
+.yacf-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#e53935;color:#fff;
+  padding:15px 30px;
+  font-family:'Barlow',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:0 0 35px rgba(229,57,53,0.4);
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  opacity:0;transform:translateY(20px);
+  animation:none}
+.yacf-btn.vis{animation:yacfBtnIn 0.7s 1s cubic-bezier(0.34,1.56,0.64,1) forwards}
+@keyframes yacfBtnIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.yacf-btn:hover{transform:translateY(-5px) scale(1.04)!important;box-shadow:0 0 70px rgba(229,57,53,0.8)}
+.yacf-btn svg{transition:transform 0.3s}
+.yacf-btn:hover svg{transform:translateX(5px)}
+
+@media(max-width:980px){
+  .yacf-grid{grid-template-columns:1fr;gap:40px}
+  .yacf{padding:70px 24px}
+}
+@media(max-width:640px){
+  .yacf{padding:60px 16px}
+  .yacf-title{font-size:42px}
+  .yacf-float{position:static;margin-top:12px;max-width:100%}
+  .yacf-main-img img{height:240px}
+  .yacf-small-img img{height:180px}
+}
+</style>
+
+<div class="yacf-outer">
+  <div class="yacf-grid-bg"></div>
+  <div class="yacf-orb1"></div>
+  <div class="yacf-orb2"></div>
+
+  <!-- FLOATING SHAPES -->
+  <div class="yacf-shape yacf-shape1"></div>
+  <div class="yacf-shape yacf-shape2"></div>
+  <div class="yacf-shape yacf-shape3"></div>
+
+  <!-- SCAN LINES -->
+  <div class="yacf-scan"></div>
+  <div class="yacf-scan yacf-scan2"></div>
+
+  <!-- PARTICLES -->
+  <div class="yacf-particles" id="yacfPts"></div>
+
+  <div class="yacf">
+    <div class="yacf-grid">
+
+      <!-- VISUAL LEFT -->
+      <div class="yacf-visual">
+        <div class="yacf-main-img" id="yacfMain">
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/NW.jpg?v=1775422083" alt="Voiture premium"/>
+          <div class="yacf-float">
+            <h3>Excellence Automobile</h3>
+            <p>Une présentation élégante et professionnelle pour valoriser chaque véhicule avec plus de prestige.</p>
+          </div>
+        </div>
+        <div class="yacf-small-img" id="yacfSmall">
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/NW2.jpg?v=1775422082" alt="Intérieur voiture"/>
+        </div>
+      </div>
+
+      <!-- CONTENT RIGHT -->
+      <div class="yacf-content">
+        <div class="yacf-badge" id="yacfBadge">
+          <span class="yacf-bdot"></span>
+          Collection Premium
+        </div>
+
+        <h2 class="yacf-title" id="yacfTitle">
+          UNE MISE EN<br>VALEUR <span>RAFFINÉE</span><br>POUR VOUS
+        </h2>
+
+        <p class="yacf-desc" id="yacfDesc">
+          Offrez à vos visiteurs une présentation plus premium, mieux structurée et pensée pour renforcer l'image de marque de votre store automobile.
+        </p>
+
+        <ul class="yacf-points">
+          <li class="yacf-pt-item" id="yacfP1">
+            <span class="yacf-pt-icon">✓</span>
+            <div>
+              <div class="yacf-pt-txt">Présentation premium et équilibrée</div>
+              <div class="yacf-pt-sub">Des layouts pensés pour mettre en valeur chaque véhicule</div>
+            </div>
+          </li>
+          <li class="yacf-pt-item" id="yacfP2">
+            <span class="yacf-pt-icon">✓</span>
+            <div>
+              <div class="yacf-pt-txt">Design moderne et branded</div>
+              <div class="yacf-pt-sub">Une identité visuelle forte et cohérente sur tout le site</div>
+            </div>
+          </li>
+          <li class="yacf-pt-item" id="yacfP3">
+            <span class="yacf-pt-icon">✓</span>
+            <div>
+              <div class="yacf-pt-txt">Expérience visuelle professionnelle</div>
+              <div class="yacf-pt-sub">Animations fluides et interactions soignées pour chaque visiteur</div>
+            </div>
+          </li>
+        </ul>
+
+        <a href="#cars" class="yacf-btn" id="yacfBtn">
+          Découvrir les véhicules
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // PARTICLES
+  var pts=document.getElementById('yacfPts');
+  if(pts){
+    for(var i=0;i<20;i++){
+      var p=document.createElement('div');
+      p.className='yacf-pt';
+      var s=1+Math.random()*3;
+      var colors=['#e53935','#ff8a80','rgba(229,57,53,0.5)'];
+      p.style.cssText='left:'+(Math.random()*100)+'%;--dx:'+((Math.random()-0.5)*120)+'px;width:'+s+'px;height:'+s+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-duration:'+(8+Math.random()*12)+'s;animation-delay:'+(Math.random()*10)+'s;';
+      pts.appendChild(p);
+    }
+  }
+
+  // SCROLL REVEAL
+  var els=[
+    {id:'yacfMain',cls:'vis'},
+    {id:'yacfSmall',cls:'vis'},
+    {id:'yacfBadge',cls:'vis'},
+    {id:'yacfTitle',cls:'vis'},
+    {id:'yacfDesc',cls:'vis'},
+    {id:'yacfP1',cls:'vis'},
+    {id:'yacfP2',cls:'vis'},
+    {id:'yacfP3',cls:'vis'},
+    {id:'yacfBtn',cls:'vis'}
+  ];
+
+  function reveal(){
+    els.forEach(function(item){
+      var el=document.getElementById(item.id);
+      if(!el)return;
+      var rect=el.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 80){
+        el.classList.add(item.cls);
+      }
+    });
+  }
+
+  window.addEventListener('scroll',reveal,{passive:true});
+  setTimeout(reveal,200);
+})();
+</script>
+
+<style>
+.yals,.yals *{box-sizing:border-box;margin:0;padding:0}
+
+.yals-outer{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  background:#03050a;
+  position:relative;
+  overflow:hidden;
+  padding:60px 0;
+}
+
+.yals-grid-bg{position:absolute;bottom:0;left:0;right:0;height:100%;background-image:linear-gradient(rgba(229,57,53,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.08) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yalsGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.3) 60%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.3) 60%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yalsGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.yals-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0}
+.yals-orb1{width:400px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.1) 0%,transparent 70%);top:-50px;left:10%;animation:yalsOrb1 9s ease-in-out infinite}
+.yals-orb2{width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.07) 0%,transparent 70%);bottom:-50px;right:10%;animation:yalsOrb2 11s ease-in-out infinite}
+@keyframes yalsOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,15px)}}
+@keyframes yalsOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-15px)}}
+
+.yals-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.2),transparent);pointer-events:none;z-index:1;animation:yalsScanMove 8s ease-in-out infinite}
+@keyframes yalsScanMove{0%{top:0%;opacity:0}15%{opacity:1}85%{opacity:0.3}100%{top:100%;opacity:0}}
+
+.yals-head{position:relative;z-index:2;text-align:center;margin-bottom:40px}
+.yals-tag{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.4);opacity:0;animation:yalsFadeUp 0.7s 0.2s both}
+.yals-tag::before,.yals-tag::after{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.5))}
+.yals-tag::after{background:linear-gradient(90deg,rgba(229,57,53,0.5),transparent)}
+
+.yals-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,60px);letter-spacing:4px;color:#fff;margin-top:10px;opacity:0;transform:rotateX(-90deg) translateY(15px);transform-origin:bottom center;animation:yalsT3d 0.8s 0.4s cubic-bezier(0.34,1.3,0.64,1) forwards}
+.yals-title span{color:#e53935;text-shadow:0 0 30px rgba(229,57,53,0.6)}
+@keyframes yalsT3d{from{opacity:0;transform:rotateX(-90deg) translateY(15px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+@keyframes yalsFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.yals-sep{width:60px;height:1px;background:linear-gradient(90deg,transparent,#e53935,transparent);margin:14px auto 0;opacity:0;animation:yalsFadeUp 0.7s 0.7s both}
+
+.yals-marquee-wrap{
+  position:relative;z-index:2;
+  mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);
+  -webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);
+}
+
+.yals-track{
+  display:flex;align-items:center;
+  gap:0;
+  animation:yalsScroll 25s linear infinite;
+  width:max-content}
+.yals-track:hover{animation-play-state:paused}
+@keyframes yalsScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.yals-logo{
+  flex-shrink:0;
+  width:160px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 24px;
+  position:relative;
+}
+.yals-logo::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:30px;background:rgba(255,255,255,0.06)}
+
+.yals-logo img{
+  width:100%;height:55px;
+  object-fit:contain;
+  filter:opacity(0.65);
+  transition:filter 0.4s ease,transform 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+
+.yals-logo:hover img{
+  filter:opacity(1) drop-shadow(0 0 14px rgba(229,57,53,0.7));
+  transform:scale(1.2)}
+
+.yals-line{position:relative;z-index:2;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15) 30%,rgba(229,57,53,0.15) 70%,transparent);margin:20px 0}
+
+@media(max-width:640px){
+  .yals-logo{width:110px;padding:0 16px}
+  .yals-logo img{height:40px}
+  .yals-track{animation-duration:18s}}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<div class="yals-outer">
+  <div class="yals-grid-bg"></div>
+  <div class="yals-orb yals-orb1"></div>
+  <div class="yals-orb yals-orb2"></div>
+  <div class="yals-scan"></div>
+
+  <div class="yals-head">
+    <div class="yals-tag">Nos Partenaires Officiels</div>
+    <h2 class="yals-title">NOS <span>MARQUES</span></h2>
+    <div class="yals-sep"></div>
+  </div>
+
+  <div class="yals-line"></div>
+
+  <div class="yals-marquee-wrap">
+    <div class="yals-track">
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/audi-logo-21.png" loading="eager" alt="Audi"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/bmw.png" loading="eager" alt="BMW"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/hg.png" loading="eager" alt="Range Rover"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/jag.png" loading="eager" alt="Jaguar"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Mrecedes_logo.png" loading="eager" alt="Mercedes"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/porsh.webp" loading="eager" alt="Porsche"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Tesla.png" loading="eager" alt="Tesla"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/audi-logo-21.png" loading="eager" alt="Audi"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/bmw.png" loading="eager" alt="BMW"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/hg.png" loading="eager" alt="Range Rover"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/jag.png" loading="eager" alt="Jaguar"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Mrecedes_logo.png" loading="eager" alt="Mercedes"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/porsh.webp" loading="eager" alt="Porsche"/></div>
+      <div class="yals-logo"><img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Tesla.png" loading="eager" alt="Tesla"/></div>
+    </div>
+  </div>
+
+  <div class="yals-line"></div>
+</div>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.yast,.yast *{box-sizing:border-box;margin:0;padding:0}
+
+.yast-outer{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  background:#03050a;
+  position:relative;
+  overflow:hidden;
+}
+
+.yast-grid-bg{position:absolute;bottom:0;left:0;right:0;height:100%;background-image:linear-gradient(rgba(229,57,53,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.1) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yastGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.3) 60%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.3) 60%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yastGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.yast-orb1{position:absolute;width:500px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.1) 0%,transparent 70%);top:-50px;left:-50px;border-radius:50%;filter:blur(60px);animation:yastOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.yast-orb2{position:absolute;width:400px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.08) 0%,transparent 70%);bottom:-50px;right:-50px;border-radius:50%;filter:blur(60px);animation:yastOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes yastOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,15px)}}
+@keyframes yastOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-15px)}}
+
+/* TOP + BOTTOM lines */
+.yast-line{position:relative;z-index:2;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.2) 30%,rgba(229,57,53,0.2) 70%,transparent)}
+
+/* SECTION */
+.yast{
+  position:relative;z-index:2;
+  padding:60px 40px;
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0;
+}
+
+/* STAT ITEM */
+.yast-item{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:20px;
+  position:relative;
+  opacity:0;
+  transform:translateY(40px) scale(0.9);
+  transition:opacity 0.8s,transform 0.8s cubic-bezier(0.34,1.3,0.64,1)}
+.yast-item.vis{opacity:1;transform:translateY(0) scale(1)}
+.yast-item:nth-child(1){transition-delay:0.1s}
+.yast-item:nth-child(3){transition-delay:0.25s}
+.yast-item:nth-child(5){transition-delay:0.4s}
+.yast-item:nth-child(7){transition-delay:0.55s}
+
+/* Number */
+.yast-num-wrap{display:flex;align-items:baseline;gap:3px;justify-content:center;margin-bottom:12px}
+.yast-digit{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,6vw,80px);
+  line-height:1;
+  color:#fff;
+  letter-spacing:-1px;
+  text-shadow:0 0 30px rgba(255,255,255,0.1)}
+.yast-sign{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28px,4vw,44px);
+  color:#e53935;
+  text-shadow:0 0 20px rgba(229,57,53,0.6);
+  animation:yastGlow 2s ease-in-out infinite}
+@keyframes yastGlow{0%,100%{text-shadow:0 0 20px rgba(229,57,53,0.5)}50%{text-shadow:0 0 40px rgba(229,57,53,1),0 0 60px rgba(229,57,53,0.4)}}
+
+/* Label */
+.yast-label{
+  font-family:'Barlow',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  line-height:1.5}
+.yast-label span{color:#e53935;display:block}
+
+/* DIVIDER */
+.yast-div{
+  width:1px;height:60px;
+  background:linear-gradient(to bottom,transparent,rgba(229,57,53,0.2),transparent);
+  flex-shrink:0}
+
+/* Hover effect */
+.yast-item::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(229,57,53,0.06) 0%,transparent 70%);
+  opacity:0;transition:opacity 0.3s;border-radius:4px}
+.yast-item:hover::before{opacity:1}
+.yast-item:hover .yast-digit{text-shadow:0 0 30px rgba(255,255,255,0.3)}
+
+@media(max-width:768px){
+  .yast{flex-wrap:wrap;padding:40px 20px}
+  .yast-div{display:none}
+  .yast-item{min-width:50%;padding:24px 10px}
+  .yast-digit{font-size:52px}
+}
+</style>
+
+<div class="yast-outer" id="yastSection">
+  <div class="yast-grid-bg"></div>
+  <div class="yast-orb1"></div>
+  <div class="yast-orb2"></div>
+
+  <div class="yast-line"></div>
+
+  <div class="yast">
+
+    <div class="yast-item">
+      <div class="yast-num-wrap">
+        <span class="yast-digit" data-target="1238">0</span>
+        <span class="yast-sign">+</span>
+      </div>
+      <div class="yast-label">Total<span>Voitures</span></div>
+    </div>
+
+    <div class="yast-div"></div>
+
+    <div class="yast-item">
+      <div class="yast-num-wrap">
+        <span class="yast-digit" data-target="820">0</span>
+        <span class="yast-sign">+</span>
+      </div>
+      <div class="yast-label">Vendeurs<span>Vérifiés</span></div>
+    </div>
+
+    <div class="yast-div"></div>
+
+    <div class="yast-item">
+      <div class="yast-num-wrap">
+        <span class="yast-digit" data-target="1042">0</span>
+        <span class="yast-sign">+</span>
+      </div>
+      <div class="yast-label">Utilisateurs<span>Actifs</span></div>
+    </div>
+
+    <div class="yast-div"></div>
+
+    <div class="yast-item">
+      <div class="yast-num-wrap">
+        <span class="yast-digit" data-target="34">0</span>
+        <span class="yast-sign">+</span>
+      </div>
+      <div class="yast-label">Annonces<span>En Vedette</span></div>
+    </div>
+
+  </div>
+
+  <div class="yast-line"></div>
+</div>
+
+<script>
+(function(){
+  function animateNum(el){
+    var target=parseInt(el.getAttribute('data-target'));
+    var curr=0;
+    var step=target/80;
+    var timer=setInterval(function(){
+      curr+=step;
+      if(curr>=target){el.textContent=target;clearInterval(timer);}
+      else{el.textContent=Math.floor(curr);}
+    },16);
+  }
+
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        // Animate numbers
+        e.target.querySelectorAll('.yast-digit').forEach(function(n){animateNum(n);});
+        // Reveal items
+        e.target.querySelectorAll('.yast-item').forEach(function(item){item.classList.add('vis');});
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.3});
+
+  var sec=document.getElementById('yastSection');
+  if(sec)obs.observe(sec);
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.yaof,.yaof *{box-sizing:border-box;margin:0;padding:0}
+
+.yaof-outer{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  background:#03050a;
+  position:relative;
+  overflow:hidden;
+}
+
+/* VELOCITY GRID */
+.yaof-grid-bg{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.12) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yaofGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yaofGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+/* CAR IMAGE BACKGROUND */
+.yaof-car-bg{
+  position:absolute;
+  right:-5%;bottom:0;
+  width:55%;max-width:800px;
+  z-index:1;pointer-events:none;
+  opacity:0.12;
+  filter:drop-shadow(-20px 0 60px rgba(229,57,53,0.3)) brightness(0.8) contrast(1.1);
+}
+.yaof-car-bg img{width:100%;display:block}
+
+/* ORBS */
+.yaof-orb1{position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(229,57,53,0.12) 0%,transparent 70%);top:-50px;right:-80px;border-radius:50%;filter:blur(70px);animation:yaofOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.yaof-orb2{position:absolute;width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.06) 0%,transparent 70%);bottom:5%;left:5%;border-radius:50%;filter:blur(70px);animation:yaofOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes yaofOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+@keyframes yaofOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+
+/* SCAN LINE */
+.yaof-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15),transparent);pointer-events:none;z-index:1;animation:yaofScanMove 7s ease-in-out infinite}
+@keyframes yaofScanMove{0%{top:0%;opacity:0}15%{opacity:1}85%{opacity:0.3}100%{top:100%;opacity:0}}
+
+/* SECTION */
+.yaof{position:relative;z-index:2;padding:100px 40px;max-width:1200px;margin:0 auto;font-family:'Barlow',sans-serif}
+
+/* HEAD */
+.yaof-head{text-align:center;margin-bottom:70px}
+
+.yaof-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.28);padding:5px 16px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff8a80;margin-bottom:20px;opacity:0;animation:yaofFadeUp 0.7s 0.2s both}
+.yaof-dot{width:5px;height:5px;border-radius:50%;background:#e53935;animation:yaofBlink 1.5s infinite}
+@keyframes yaofBlink{0%,100%{opacity:1}50%{opacity:0.1}}
+
+.yaof-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,88px);line-height:0.9;letter-spacing:2px;color:#fff;margin-bottom:10px;opacity:0;transform:rotateX(-90deg) translateY(20px);transform-origin:bottom center;animation:yaofT3d 0.9s 0.4s cubic-bezier(0.34,1.3,0.64,1) forwards}
+.yaof-title span{color:#e53935;text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 50px rgba(229,57,53,0.6);animation:yaofGlow 2.5s 1.4s ease-in-out infinite}
+@keyframes yaofT3d{from{opacity:0;transform:rotateX(-90deg) translateY(20px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+@keyframes yaofGlow{0%,100%{text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.5)}50%{text-shadow:0 4px 0 rgba(180,0,0,0.7),0 0 80px rgba(229,57,53,0.9)}}
+
+.yaof-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.4);max-width:520px;margin:0 auto;line-height:1.8;opacity:0;animation:yaofFadeUp 0.7s 0.8s both}
+
+/* GRID */
+.yaof-grid{display:flex;gap:24px;align-items:flex-start}
+
+/* CARD */
+.yaof-card{
+  flex:1;
+  background:rgba(5,8,18,0.75);
+  border:1px solid rgba(229,57,53,0.12);
+  border-radius:4px;
+  padding:36px 30px;
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(70px) rotateX(-20deg) scale(0.92);
+  transform-origin:bottom center;
+  transition:transform 0.5s cubic-bezier(0.34,1.4,0.64,1),border-color 0.3s,box-shadow 0.4s;
+  animation:yaofCardPop 0.9s cubic-bezier(0.34,1.3,0.64,1) both;
+  backdrop-filter:blur(20px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.yaof-card:nth-child(1){animation-delay:0.5s}
+.yaof-card:nth-child(2){animation-delay:0.68s;margin-top:40px}
+.yaof-card:nth-child(3){animation-delay:0.86s}
+@keyframes yaofCardPop{0%{opacity:0;transform:translateY(70px) rotateX(-20deg) scale(0.92)}60%{transform:translateY(-8px) rotateX(2deg) scale(1.01)}80%{transform:translateY(4px) rotateX(-1deg)}100%{opacity:1;transform:translateY(0) rotateX(0) scale(1)}}
+
+/* Scan top border */
+.yaof-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.6),transparent);animation:yaofCardScan 4s ease-in-out infinite;z-index:5}
+@keyframes yaofCardScan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+
+/* Corner accent */
+.yaof-card::after{content:'';position:absolute;top:0;right:0;width:40px;height:40px;border-top:1px solid rgba(229,57,53,0.3);border-right:1px solid rgba(229,57,53,0.3);pointer-events:none}
+
+.yaof-card:hover{
+  transform:translateY(-14px) scale(1.025)!important;
+  border-color:rgba(229,57,53,0.4);
+  box-shadow:0 40px 90px rgba(0,0,0,0.7),0 0 40px rgba(229,57,53,0.12)}
+
+/* ICON */
+.yaof-icon{
+  width:56px;height:56px;
+  border-radius:3px;
+  background:rgba(229,57,53,0.1);
+  border:1px solid rgba(229,57,53,0.2);
+  display:flex;align-items:center;justify-content:center;
+  color:#e53935;
+  margin-bottom:24px;
+  transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.yaof-icon svg{width:26px;height:26px;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.yaof-card:hover .yaof-icon{
+  background:#e53935;color:#fff;
+  transform:scale(1.1) rotate(8deg);
+  box-shadow:0 0 24px rgba(229,57,53,0.5)}
+.yaof-card:hover .yaof-icon svg{transform:scale(1.1)}
+
+/* CARD NUMBER */
+.yaof-card-num{
+  position:absolute;top:20px;right:20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:3px;
+  color:rgba(255,255,255,0.08);
+  transition:color 0.3s}
+.yaof-card:hover .yaof-card-num{color:rgba(229,57,53,0.2)}
+
+/* TITLE */
+.yaof-card-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;letter-spacing:2px;
+  color:#fff;
+  margin-bottom:12px;
+  transition:color 0.3s}
+.yaof-card:hover .yaof-card-title{color:#ff8a80}
+
+/* DESC */
+.yaof-card-desc{
+  font-size:13px;font-weight:300;
+  color:rgba(255,255,255,0.4);
+  line-height:1.8}
+
+/* BOTTOM LINE */
+.yaof-card-line{
+  width:0;height:1px;
+  background:var(--red,#e53935);
+  margin-top:20px;
+  transition:width 0.5s cubic-bezier(0.34,1.2,0.64,1)}
+.yaof-card:hover .yaof-card-line{width:100%}
+
+@keyframes yaofFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  .yaof-grid{flex-direction:column}
+  .yaof-card:nth-child(2){margin-top:0}
+  .yaof{padding:70px 16px}
+  .yaof-title{font-size:48px}
+  .yaof-car-bg{opacity:0.06;width:100%}
+}
+</style>
+
+<div class="yaof-outer">
+  <div class="yaof-grid-bg"></div>
+  <div class="yaof-orb1"></div>
+  <div class="yaof-orb2"></div>
+  <div class="yaof-scan"></div>
+
+  <!-- CAR IMAGE BACKGROUND -->
+  <div class="yaof-car-bg">
+    <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ChatGPT_Image_29_avr._2026_21_25_11.png?v=1777494776" alt=""/>
+  </div>
+
+  <div class="yaof">
+
+    <!-- HEAD -->
+    <div class="yaof-head">
+      <div class="yaof-tag"><span class="yaof-dot"></span>Nos Services</div>
+      <h2 class="yaof-title">CE QUE NOUS<br><span>OFFRONS</span></h2>
+      <p class="yaof-sub">L'excellence automobile à votre service, avec des solutions sur mesure pour chaque trajet.</p>
+    </div>
+
+    <!-- GRID -->
+    <div class="yaof-grid">
+
+      <div class="yaof-card">
+        <span class="yaof-card-num">01</span>
+        <div class="yaof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3 class="yaof-card-title">Qualité Exceptionnelle</h3>
+        <p class="yaof-card-desc">Une flotte rigoureusement sélectionnée pour vous garantir une expérience de conduite inégalée et sécurisée.</p>
+        <div class="yaof-card-line"></div>
+      </div>
+
+      <div class="yaof-card">
+        <span class="yaof-card-num">02</span>
+        <div class="yaof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9"/></svg>
+        </div>
+        <h3 class="yaof-card-title">Options Sur Mesure</h3>
+        <p class="yaof-card-desc">Personnalisez votre location selon vos besoins : kilométrage illimité, chauffeur privé ou livraison à domicile.</p>
+        <div class="yaof-card-line"></div>
+      </div>
+
+      <div class="yaof-card">
+        <span class="yaof-card-num">03</span>
+        <div class="yaof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <h3 class="yaof-card-title">Technologie Innovante</h3>
+        <p class="yaof-card-desc">Des véhicules équipés des dernières innovations en matière d'assistance à la conduite et de divertissement.</p>
+        <div class="yaof-card-line"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.ya2s,.ya2s *{box-sizing:border-box;margin:0;padding:0}
+
+.ya2s-outer{margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;background:#03050a;position:relative;overflow:hidden}
+
+.ya2s-grid{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.12) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:ya2sGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes ya2sGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.ya2s-orb1{position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(229,57,53,0.12) 0%,transparent 70%);top:-50px;right:-80px;border-radius:50%;filter:blur(70px);animation:ya2sOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.ya2s-orb2{position:absolute;width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.06) 0%,transparent 70%);bottom:5%;left:5%;border-radius:50%;filter:blur(70px);animation:ya2sOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes ya2sOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+@keyframes ya2sOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+
+.ya2s-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15),transparent);pointer-events:none;z-index:1;animation:ya2sScan 8s ease-in-out infinite}
+@keyframes ya2sScan{0%{top:0%;opacity:0}15%{opacity:1}85%{opacity:0.3}100%{top:100%;opacity:0}}
+
+/* ===== MARQUEE ===== */
+.ya2s-marq{position:relative;z-index:2;padding:50px 0 40px}
+.ya2s-marq-head{text-align:center;margin-bottom:28px;opacity:0;animation:ya2sFadeUp 0.7s 0.2s both}
+.ya2s-marq-head span{font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+.ya2s-marq-line{position:relative;z-index:2;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15) 30%,rgba(229,57,53,0.15) 70%,transparent);margin-bottom:32px}
+.ya2s-marq-wrap{display:flex;width:100%;mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent)}
+.ya2s-marq-track{display:flex;align-items:center;gap:60px;animation:ya2sMarqScroll 28s linear infinite;width:max-content}
+.ya2s-marq-track:hover{animation-play-state:paused}
+@keyframes ya2sMarqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ya2s-brand{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:rgba(255,255,255,0.12);white-space:nowrap;cursor:default;transition:color 0.3s,text-shadow 0.3s;position:relative}
+.ya2s-brand::after{content:'✦';margin-left:60px;color:rgba(229,57,53,0.2);font-size:14px}
+.ya2s-brand:hover{color:#fff;text-shadow:0 0 30px rgba(229,57,53,0.7)}
+.ya2s-marq-line2{position:relative;z-index:2;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15) 30%,rgba(229,57,53,0.15) 70%,transparent);margin-top:32px}
+
+/* ===== SLIM FEATURE ===== */
+.ya2s-feat{position:relative;z-index:2;padding:90px 40px 100px;max-width:1100px;margin:0 auto;font-family:'Barlow',sans-serif}
+
+/* CAR BG — tswira fit */
+.ya2s-car-bg{
+  position:absolute;
+  right:0;bottom:0;
+  width:62%;max-width:820px;
+  z-index:1;pointer-events:none;
+  opacity:0;
+  animation:ya2sCarReveal 1.5s 0.5s cubic-bezier(0.22,1,0.36,1) forwards}
+@keyframes ya2sCarReveal{
+  from{opacity:0;transform:translateX(60px) scale(0.96)}
+  to{opacity:0.18;transform:translateX(0) scale(1)}}
+.ya2s-car-bg img{
+  width:100%;display:block;
+  filter:drop-shadow(-30px 0 80px rgba(229,57,53,0.5)) brightness(0.9) contrast(1.1) saturate(1.2)}
+.ya2s-car-glow{position:absolute;bottom:-10px;left:5%;right:5%;height:60px;background:radial-gradient(ellipse,rgba(229,57,53,0.5) 0%,transparent 70%);filter:blur(14px);animation:ya2sCarGlow 3s ease-in-out infinite}
+@keyframes ya2sCarGlow{0%,100%{opacity:0.5;transform:scaleX(0.9)}50%{opacity:0.9;transform:scaleX(1.1)}}
+
+.ya2s-flex{position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+
+/* IMAGE LEFT */
+.ya2s-img-col{position:relative;opacity:0;transform:translateX(-60px) scale(0.95);transition:opacity 0.9s,transform 0.9s cubic-bezier(0.34,1.2,0.64,1)}
+.ya2s-img-col.vis{opacity:1;transform:translateX(0) scale(1)}
+.ya2s-img-wrap{position:relative;border-radius:4px;overflow:hidden;border:1px solid rgba(229,57,53,0.15);box-shadow:0 30px 80px rgba(0,0,0,0.6)}
+.ya2s-img-wrap img{width:100%;height:420px;object-fit:cover;display:block;transition:transform 0.6s ease}
+.ya2s-img-wrap:hover img{transform:scale(1.04)}
+.ya2s-img-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.8),transparent);animation:ya2sImgScan 3.5s ease-in-out infinite;z-index:5}
+@keyframes ya2sImgScan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+.ya2s-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(3,5,10,0.7) 0%,transparent 50%);pointer-events:none}
+.ya2s-corner{position:absolute;bottom:-1px;right:-1px;width:40px;height:40px;border-bottom:1px solid rgba(229,57,53,0.4);border-right:1px solid rgba(229,57,53,0.4);z-index:6}
+
+/* TEXT RIGHT */
+.ya2s-txt-col{opacity:0;transform:translateX(60px);transition:opacity 0.9s 0.2s,transform 0.9s 0.2s cubic-bezier(0.34,1.2,0.64,1)}
+.ya2s-txt-col.vis{opacity:1;transform:translateX(0)}
+
+.ya2s-mini-tag{font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#e53935;display:block;margin-bottom:16px;opacity:0}
+.ya2s-txt-col.vis .ya2s-mini-tag{animation:ya2sFadeUp 0.6s 0.4s both}
+
+.ya2s-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(56px,6.5vw,96px);
+  line-height:0.88;letter-spacing:3px;
+  color:#fff;margin-bottom:18px;
+  opacity:0;transform:rotateX(-90deg) translateY(20px);
+  transform-origin:bottom center}
+.ya2s-txt-col.vis .ya2s-title{animation:ya2sT3d 0.9s 0.5s cubic-bezier(0.34,1.3,0.64,1) forwards}
+@keyframes ya2sT3d{from{opacity:0;transform:rotateX(-90deg) translateY(20px)}to{opacity:1;transform:rotateX(0) translateY(0)}}
+.ya2s-title span{
+  display:block;
+  color:#e53935;
+  text-shadow:0 6px 0 rgba(150,0,0,0.5),0 0 50px rgba(229,57,53,0.6);
+  animation:ya2sGlow 2.5s 1.6s ease-in-out infinite}
+@keyframes ya2sGlow{0%,100%{text-shadow:0 6px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.5)}50%{text-shadow:0 6px 0 rgba(180,0,0,0.7),0 0 90px rgba(229,57,53,0.9),0 0 130px rgba(229,57,53,0.3)}}
+
+.ya2s-desc{font-family:'Barlow',sans-serif;font-size:15px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:28px;opacity:0}
+.ya2s-txt-col.vis .ya2s-desc{animation:ya2sFadeUp 0.7s 0.7s both}
+
+/* BARS */
+.ya2s-bars{margin-bottom:28px;display:flex;flex-direction:column;gap:14px;opacity:0}
+.ya2s-txt-col.vis .ya2s-bars{animation:ya2sFadeUp 0.7s 0.85s both}
+.ya2s-bar-row{display:flex;flex-direction:column;gap:6px}
+.ya2s-bar-label{display:flex;justify-content:space-between;align-items:center}
+.ya2s-bar-name{font-family:'Barlow',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.ya2s-bar-pct{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#e53935}
+.ya2s-bar-bg{width:100%;height:2px;background:rgba(255,255,255,0.06);border-radius:1px;overflow:hidden}
+.ya2s-bar-fill{height:100%;background:linear-gradient(90deg,#e53935,#ff6b6b);border-radius:1px;width:0;transition:width 1.4s cubic-bezier(0.34,1.2,0.64,1)}
+.ya2s-txt-col.vis .ya2s-bar-fill{width:var(--w)}
+
+/* LIST */
+.ya2s-list{list-style:none;padding:0;margin-bottom:32px;display:flex;flex-direction:column;gap:9px;opacity:0}
+.ya2s-txt-col.vis .ya2s-list{animation:ya2sFadeUp 0.7s 1s both}
+.ya2s-list li{display:flex;align-items:center;gap:10px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.55)}
+.ya2s-list-dot{width:5px;height:5px;border-radius:50%;background:#e53935;flex-shrink:0;box-shadow:0 0 8px rgba(229,57,53,0.6)}
+
+/* BTN */
+.ya2s-btn{display:inline-flex;align-items:center;gap:10px;background:#e53935;color:#fff;padding:15px 32px;font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;box-shadow:0 0 30px rgba(229,57,53,0.4);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);opacity:0}
+.ya2s-txt-col.vis .ya2s-btn{animation:ya2sFadeUp 0.7s 1.15s both}
+.ya2s-btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 0 60px rgba(229,57,53,0.8)}
+.ya2s-btn svg{transition:transform 0.3s}
+.ya2s-btn:hover svg{transform:translateX(5px)}
+
+@keyframes ya2sFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  .ya2s-flex{grid-template-columns:1fr;gap:36px}
+  .ya2s-feat{padding:60px 16px 80px}
+  .ya2s-img-wrap img{height:280px}
+  .ya2s-car-bg{opacity:0;animation:none}
+  .ya2s-title{font-size:52px}
+  .ya2s-brand{font-size:24px}
+}
+</style>
+
+<div class="ya2s-outer">
+  <div class="ya2s-grid"></div>
+  <div class="ya2s-orb1"></div>
+  <div class="ya2s-orb2"></div>
+  <div class="ya2s-scan"></div>
+
+  <!-- MARQUEE -->
+  <div class="ya2s-marq">
+    <div class="ya2s-marq-head"><span>Nos Marques Partenaires</span></div>
+    <div class="ya2s-marq-line"></div>
+    <div class="ya2s-marq-wrap">
+      <div class="ya2s-marq-track">
+        <span class="ya2s-brand">AUDI</span>
+        <span class="ya2s-brand">FERRARI</span>
+        <span class="ya2s-brand">LAMBORGHINI</span>
+        <span class="ya2s-brand">PORSCHE</span>
+        <span class="ya2s-brand">MERCEDES</span>
+        <span class="ya2s-brand">BMW</span>
+        <span class="ya2s-brand">RANGE ROVER</span>
+        <span class="ya2s-brand">AUDI</span>
+        <span class="ya2s-brand">FERRARI</span>
+        <span class="ya2s-brand">LAMBORGHINI</span>
+        <span class="ya2s-brand">PORSCHE</span>
+        <span class="ya2s-brand">MERCEDES</span>
+        <span class="ya2s-brand">BMW</span>
+        <span class="ya2s-brand">RANGE ROVER</span>
+      </div>
+    </div>
+    <div class="ya2s-marq-line2"></div>
+  </div>
+
+  <!-- SLIM FEATURE -->
+  <div class="ya2s-feat">
+
+    <!-- CAR BG FIT -->
+    <div class="ya2s-car-bg">
+      <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ChatGPT_Image_29_avr._2026_21_25_11.png?v=1777494776" alt=""/>
+      <div class="ya2s-car-glow"></div>
+    </div>
+
+    <div class="ya2s-flex">
+
+      <!-- IMAGE LEFT -->
+      <div class="ya2s-img-col" id="ya2sImg">
+        <div class="ya2s-img-wrap">
+          <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ChatGPT_Image_29_avr._2026_21_25_11.png?v=1777494776" alt="Voiture"/>
+          <div class="ya2s-corner"></div>
+        </div>
+      </div>
+
+      <!-- TEXT RIGHT -->
+      <div class="ya2s-txt-col" id="ya2sTxt">
+        <span class="ya2s-mini-tag">Performance</span>
+        <h2 class="ya2s-title">CONDUITE<br><span>SANS LIMITE</span></h2>
+        <p class="ya2s-desc">L'ingénierie de précision rencontre le luxe absolu pour une expérience de conduite inégalée à chaque trajet.</p>
+
+        <div class="ya2s-bars">
+          <div class="ya2s-bar-row">
+            <div class="ya2s-bar-label">
+              <span class="ya2s-bar-name">Puissance</span>
+              <span class="ya2s-bar-pct">95%</span>
+            </div>
+            <div class="ya2s-bar-bg"><div class="ya2s-bar-fill" style="--w:95%"></div></div>
+          </div>
+          <div class="ya2s-bar-row">
+            <div class="ya2s-bar-label">
+              <span class="ya2s-bar-name">Agilité</span>
+              <span class="ya2s-bar-pct">88%</span>
+            </div>
+            <div class="ya2s-bar-bg"><div class="ya2s-bar-fill" style="--w:88%"></div></div>
+          </div>
+          <div class="ya2s-bar-row">
+            <div class="ya2s-bar-label">
+              <span class="ya2s-bar-name">Confort</span>
+              <span class="ya2s-bar-pct">92%</span>
+            </div>
+            <div class="ya2s-bar-bg"><div class="ya2s-bar-fill" style="--w:92%"></div></div>
+          </div>
+        </div>
+
+        <ul class="ya2s-list">
+          <li><span class="ya2s-list-dot"></span>Cuir Nappa Premium</li>
+          <li><span class="ya2s-list-dot"></span>Système Audio 4D</li>
+          <li><span class="ya2s-list-dot"></span>Assistance Conduite Avancée</li>
+        </ul>
+
+        <a href="#cars" class="ya2s-btn">
+          Découvrir
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}
+    });
+  },{threshold:0.15});
+  ['ya2sImg','ya2sTxt'].forEach(function(id){
+    var el=document.getElementById(id);if(el)obs.observe(el);
+  });
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.yasl,.yasl *{box-sizing:border-box;margin:0;padding:0}
+
+.yasl-outer{margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;background:#03050a;position:relative;overflow:hidden}
+
+.yasl-grid{position:absolute;bottom:0;left:0;right:0;height:70%;background-image:linear-gradient(rgba(229,57,53,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(229,57,53,0.12) 1px,transparent 1px);background-size:70px 70px;transform:perspective(650px) rotateX(52deg);transform-origin:bottom center;animation:yaslGrid 3s linear infinite;mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,0.4) 55%,transparent 100%);pointer-events:none;z-index:0}
+@keyframes yaslGrid{0%{background-position:0 0}100%{background-position:0 70px}}
+
+.yasl-orb1{position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(229,57,53,0.12) 0%,transparent 70%);top:-50px;right:-80px;border-radius:50%;filter:blur(70px);animation:yaslOrb1 9s ease-in-out infinite;z-index:0;pointer-events:none}
+.yasl-orb2{position:absolute;width:300px;height:300px;background:radial-gradient(ellipse,rgba(229,57,53,0.06) 0%,transparent 70%);bottom:5%;left:5%;border-radius:50%;filter:blur(70px);animation:yaslOrb2 11s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes yaslOrb1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+@keyframes yaslOrb2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+
+.yasl-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15),transparent);pointer-events:none;z-index:1;animation:yaslScan 8s ease-in-out infinite}
+@keyframes yaslScan{0%{top:0%;opacity:0}15%{opacity:1}85%{opacity:0.3}100%{top:100%;opacity:0}}
+
+/* SECTION */
+.yasl{position:relative;z-index:2;padding:90px 0 80px;font-family:'Barlow',sans-serif}
+
+/* HEADER */
+.yasl-head{
+  max-width:1280px;margin:0 auto 48px;padding:0 40px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  opacity:0;transform:translateY(30px);
+  transition:opacity 0.8s,transform 0.8s cubic-bezier(0.34,1.2,0.64,1)}
+.yasl-head.vis{opacity:1;transform:translateY(0)}
+
+.yasl-head-left{}
+.yasl-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.28);padding:5px 14px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ff8a80;margin-bottom:16px}
+.yasl-tag-dot{width:5px;height:5px;border-radius:50%;background:#e53935;animation:yaslBlink 1.5s infinite}
+@keyframes yaslBlink{0%,100%{opacity:1}50%{opacity:0.1}}
+
+.yasl-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(44px,6vw,80px);
+  line-height:0.9;letter-spacing:2px;color:#fff}
+.yasl-title span{color:#e53935;text-shadow:0 4px 0 rgba(150,0,0,0.5),0 0 40px rgba(229,57,53,0.5)}
+
+.yasl-voir{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;color:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:12px 24px;
+  font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  transition:all 0.3s;white-space:nowrap}
+.yasl-voir:hover{border-color:#e53935;color:#fff;background:rgba(229,57,53,0.08);transform:translateY(-2px)}
+.yasl-voir svg{transition:transform 0.3s}
+.yasl-voir:hover svg{transform:translateX(5px)}
+
+/* LINE */
+.yasl-line{position:relative;z-index:2;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.15) 30%,rgba(229,57,53,0.15) 70%,transparent);margin-bottom:40px}
+
+/* SCROLL CONTAINER */
+.yasl-scroll{
+  width:100%;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;scrollbar-width:none;
+  padding-bottom:30px}
+.yasl-scroll:active{cursor:grabbing}
+.yasl-scroll::-webkit-scrollbar{display:none}
+
+.yasl-track{
+  display:flex;gap:22px;
+  padding-left:calc((100vw - 1280px) / 2 + 40px);
+  padding-right:40px;
+  width:max-content}
+
+/* CARD */
+.yasl-card{
+  flex:0 0 360px;
+  scroll-snap-align:start;
+  position:relative;
+  background:rgba(5,8,18,0.8);
+  border:1px solid rgba(229,57,53,0.12);
+  border-radius:4px;overflow:hidden;
+  text-decoration:none;display:block;
+  opacity:0;
+  transform:translateY(70px) rotateX(-18deg) scale(0.92);
+  transform-origin:bottom center;
+  transition:transform 0.5s cubic-bezier(0.34,1.4,0.64,1),border-color 0.3s,box-shadow 0.4s;
+  animation:yaslCardPop 0.9s cubic-bezier(0.34,1.3,0.64,1) both;
+  backdrop-filter:blur(16px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.yasl-card:nth-child(1){animation-delay:0.4s}
+.yasl-card:nth-child(2){animation-delay:0.56s}
+.yasl-card:nth-child(3){animation-delay:0.72s}
+.yasl-card:nth-child(4){animation-delay:0.88s}
+.yasl-card:nth-child(5){animation-delay:1.04s}
+@keyframes yaslCardPop{0%{opacity:0;transform:translateY(70px) rotateX(-18deg) scale(0.92)}60%{transform:translateY(-8px) rotateX(2deg) scale(1.01)}80%{transform:translateY(4px) rotateX(-1deg)}100%{opacity:1;transform:translateY(0) rotateX(0) scale(1)}}
+
+.yasl-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(229,57,53,0.7),transparent);animation:yaslCardScan 4s ease-in-out infinite;z-index:10}
+@keyframes yaslCardScan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+
+.yasl-card:hover{
+  transform:translateY(-16px) scale(1.025)!important;
+  border-color:rgba(229,57,53,0.5);
+  box-shadow:0 40px 90px rgba(0,0,0,0.7),0 0 50px rgba(229,57,53,0.18)}
+
+/* MEDIA */
+.yasl-media{position:relative;height:230px;background:#000;overflow:hidden}
+.yasl-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;z-index:1;position:relative}
+.yasl-card:hover .yasl-media img{transform:scale(1.08)}
+.yasl-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(3,5,10,0.95) 0%,rgba(3,5,10,0.2) 50%,transparent 100%);z-index:2;pointer-events:none}
+
+/* OVERLAY */
+.yasl-overlay{
+  position:absolute;inset:0;
+  background:rgba(229,57,53,0.88);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.35s;z-index:5}
+.yasl-card:hover .yasl-overlay{opacity:1}
+.yasl-overlay-btn{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:3px;
+  color:#fff;border:1px solid rgba(255,255,255,0.6);
+  padding:10px 24px;border-radius:2px;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+
+/* BADGE */
+.yasl-badge{
+  position:absolute;top:14px;left:14px;
+  background:#e53935;color:#fff;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;letter-spacing:2px;
+  padding:4px 12px;border-radius:2px;z-index:6;
+  clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);
+  box-shadow:0 0 16px rgba(229,57,53,0.5)}
+
+/* PRICE OVER IMAGE */
+.yasl-price-over{
+  position:absolute;right:14px;bottom:14px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;letter-spacing:1px;
+  color:#fff;z-index:6;
+  text-shadow:0 2px 0 rgba(229,57,53,0.4),0 0 16px rgba(229,57,53,0.3)}
+
+/* BODY */
+.yasl-body{padding:18px 16px 20px;background:rgba(5,8,18,0.95)}
+
+.yasl-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.yasl-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;letter-spacing:2px;color:#fff;
+  transition:color 0.3s}
+.yasl-card:hover .yasl-name{color:#ff8a80}
+.yasl-year{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:1px;
+  color:rgba(229,57,53,0.6)}
+
+.yasl-specs{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.yasl-spec{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:2px;padding:5px 9px;
+  font-family:'Barlow',sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  transition:border-color 0.3s}
+.yasl-card:hover .yasl-spec{border-color:rgba(229,57,53,0.15)}
+
+.yasl-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,0.05);padding-top:12px}
+.yasl-cta{
+  font-family:'Barlow',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:#e53935;transition:letter-spacing 0.3s}
+.yasl-card:hover .yasl-cta{letter-spacing:3px}
+.yasl-arrow{
+  width:32px;height:32px;border-radius:2px;
+  background:rgba(229,57,53,0.1);
+  border:1px solid rgba(229,57,53,0.2);
+  display:flex;align-items:center;justify-content:center;
+  color:#e53935;font-size:13px;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.yasl-card:hover .yasl-arrow{background:#e53935;color:#fff;transform:scale(1.2);box-shadow:0 0 20px rgba(229,57,53,0.5)}
+
+/* DRAG HINT */
+.yasl-drag{
+  text-align:center;margin-top:28px;position:relative;z-index:2;
+  font-family:'Barlow',sans-serif;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.12);
+  opacity:0;animation:yaslFadeUp 0.7s 1.4s both}
+
+@keyframes yaslFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  .yasl-head{flex-direction:column;align-items:flex-start;gap:20px;padding:0 16px}
+  .yasl-track{padding-left:16px}
+  .yasl-card{flex:0 0 300px}
+  .yasl-title{font-size:48px}
+  .yasl{padding:70px 0 60px}}
+</style>
+
+<div class="yasl-outer">
+  <div class="yasl-grid"></div>
+  <div class="yasl-orb1"></div>
+  <div class="yasl-orb2"></div>
+  <div class="yasl-scan"></div>
+
+  <div class="yasl">
+
+    <!-- HEAD -->
+    <div class="yasl-head" id="yaslHead">
+      <div class="yasl-head-left">
+        <div class="yasl-tag"><span class="yasl-tag-dot"></span>Explorez La Gamme</div>
+        <h2 class="yasl-title">MODÈLES <span>EN VEDETTE</span></h2>
+      </div>
+      <a href="#cars" class="yasl-voir">
+        Voir tout le catalogue
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="yasl-line"></div>
+
+    <!-- SCROLL -->
+    <div class="yasl-scroll" id="yaslScroll">
+      <div class="yasl-track">
+
+        <a class="yasl-card" href="#cars">
+          <div class="yasl-media">
+            <span class="yasl-badge">Disponible</span>
+            <span class="yasl-price-over">215 000 €</span>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/Porsche.webp?v=1775506183" alt="Porsche 911 Turbo"/>
+            <div class="yasl-overlay"><span class="yasl-overlay-btn">DÉCOUVRIR</span></div>
+          </div>
+          <div class="yasl-body">
+            <div class="yasl-top">
+              <h3 class="yasl-name">Porsche 911 Turbo</h3>
+              <span class="yasl-year">2024</span>
+            </div>
+            <div class="yasl-specs">
+              <span class="yasl-spec">Essence</span>
+              <span class="yasl-spec">0 KM</span>
+              <span class="yasl-spec">Auto</span>
+            </div>
+            <div class="yasl-footer">
+              <span class="yasl-cta">Voir détails →</span>
+              <span class="yasl-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="yasl-card" href="#cars">
+          <div class="yasl-media">
+            <span class="yasl-badge">Promo</span>
+            <span class="yasl-price-over">185 900 €</span>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ASDFG.jpg?v=1775509024" alt="Mercedes-AMG G63"/>
+            <div class="yasl-overlay"><span class="yasl-overlay-btn">DÉCOUVRIR</span></div>
+          </div>
+          <div class="yasl-body">
+            <div class="yasl-top">
+              <h3 class="yasl-name">Mercedes-AMG G63</h3>
+              <span class="yasl-year">2023</span>
+            </div>
+            <div class="yasl-specs">
+              <span class="yasl-spec">V8 Biturbo</span>
+              <span class="yasl-spec">8 500 KM</span>
+              <span class="yasl-spec">Auto</span>
+            </div>
+            <div class="yasl-footer">
+              <span class="yasl-cta">Voir détails →</span>
+              <span class="yasl-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="yasl-card" href="#cars">
+          <div class="yasl-media">
+            <span class="yasl-price-over">162 000 €</span>
+            <img src="https://cdn.shopify.com/s/files/1/0814/3149/4875/files/ASDF1.webp?v=1775508896" alt="Range Rover Vogue"/>
+            <div class="yasl-overlay"><span class="yasl-overlay-btn">DÉCOUVRIR</span></div>
+          </div>
+          <div class="yasl-body">
+            <div class="yasl-top">
+              <h3 class="yasl-name">Range Rover Vogue</h3>
+              <span class="yasl-year">2024</span>
+            </div>
+            <div class="yasl-specs">
+              <span class="yasl-spec">Hybride</span>
+              <span class="yasl-spec">0 KM</span>
+              <span class="yasl-spec">Auto</span>
+            </div>
+            <div class="yasl-footer">
+              <span class="yasl-cta">Voir détails →</span>
+              <span class="yasl-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="yasl-drag">← Faites glisser pour explorer →</div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var head=document.getElementById('yaslHead');
+  var scroll=document.getElementById('yaslScroll');
+
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        if(head)head.classList.add('vis');
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.1});
+  if(head)obs.observe(head);
+
+  // DRAG
+  if(scroll){
+    var isDown=false,startX,scrollLeft,dragDist=0;
+    scroll.addEventListener('mousedown',function(e){
+      isDown=true;startX=e.pageX-scroll.offsetLeft;
+      scrollLeft=scroll.scrollLeft;scroll.style.cursor='grabbing';dragDist=0;
+    });
+    scroll.addEventListener('mouseleave',function(){isDown=false;scroll.style.cursor='grab'});
+    scroll.addEventListener('mouseup',function(){isDown=false;scroll.style.cursor='grab'});
+    scroll.addEventListener('mousemove',function(e){
+      if(!isDown)return;e.preventDefault();
+      var x=e.pageX-scroll.offsetLeft;
+      var walk=(x-startX)*1.8;
+      scroll.scrollLeft=scrollLeft-walk;
+      dragDist=Math.abs(x-startX);
+    });
+    scroll.querySelectorAll('.yasl-card').forEach(function(c){
+      c.addEventListener('click',function(e){if(dragDist>10)e.preventDefault();});
+    });
+  }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<section class="faq3d-outer" id="faq3d-premium">
+  <div class="faq3d-grid"></div>
+  <div class="faq3d-orb faq3d-orb1"></div>
+  <div class="faq3d-orb faq3d-orb2"></div>
+  <div class="faq3d-scan"></div>
+
+  <div class="faq3d-wrap">
+    <div class="faq3d-header reveal3d">
+      <div class="faq3d-tag"><span></span> Assistance & Expertise</div>
+      <h2>QUESTIONS <span>FRÉQUENTES</span></h2>
+      <p>Tout ce que vos clients doivent savoir avant de passer à l’action.</p>
+    </div>
+
+    <div class="faq3d-list">
+      <div class="faq3d-item reveal3d delay1">
+        <button class="faq3d-question">
+          <span>Quelle est l'origine de vos véhicules ?</span>
+          <b></b>
+        </button>
+        <div class="faq3d-answer">
+          <p>Nos véhicules proviennent majoritairement de concessions officielles européennes et marocaines, sélectionnés pour leur historique d'entretien limpide et leur état certifié.</p>
+        </div>
+      </div>
+
+      <div class="faq3d-item reveal3d delay2">
+        <button class="faq3d-question">
+          <span>Le kilométrage est-il certifié ?</span>
+          <b></b>
+        </button>
+        <div class="faq3d-answer">
+          <p>Absolument. Chaque véhicule fait l'objet d'une vérification rigoureuse de l'historique numérique et physique pour garantir l'authenticité du kilométrage affiché.</p>
+        </div>
+      </div>
+
+      <div class="faq3d-item reveal3d delay3">
+        <button class="faq3d-question">
+          <span>Quels sont les documents nécessaires pour un crédit ?</span>
+          <b></b>
+        </button>
+        <div class="faq3d-answer">
+          <p>Pour un dossier de financement au Maroc, il nous faudra généralement vos 3 derniers relevés bancaires, une copie de votre CIN et une attestation de travail ou justificatif de revenus.</p>
+        </div>
+      </div>
+
+      <div class="faq3d-item reveal3d delay4">
+        <button class="faq3d-question">
+          <span>Puis-je faire reprendre mon ancien véhicule ?</span>
+          <b></b>
+        </button>
+        <div class="faq3d-answer">
+          <p>Oui, nous proposons un service de reprise après expertise de votre véhicule actuel, vous permettant de déduire sa valeur de votre nouvel achat de manière simplifiée.</p>
+        </div>
+      </div>
+
+      <div class="faq3d-item reveal3d delay5">
+        <button class="faq3d-question">
+          <span>Proposez-vous un service d'immatriculation ?</span>
+          <b></b>
+        </button>
+        <div class="faq3d-answer">
+          <p>Nous nous occupons de l'intégralité des démarches administratives pour l'obtention de votre carte grise et de vos plaques, vous livrant un véhicule prêt à rouler.</p>
+        </div>
+      </div>
+
+      <div class="faq3d-item reveal3d delay6">
+        <button class="faq3d-question">
+          <span>Comment réserver un véhicule à distance ?</span>
+          <b></b>
+        </button>
+        <div class="faq3d-answer">
+          <p>Vous pouvez bloquer un véhicule via un acompte sécurisé. Nous vous transmettons ensuite un dossier complet incluant photos, vidéos détaillées et rapport d'expertise avant livraison.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.faq3d-outer,
+.faq3d-outer *{
+  box-sizing:border-box;
+}
+
+.faq3d-outer{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  position:relative;
+  overflow:hidden;
+  background:#03050a;
+  padding:100px 0;
+  font-family:'Barlow',sans-serif;
+  color:#fff;
+}
+
+.faq3d-grid{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:75%;
+  background-image:
+    linear-gradient(rgba(229,57,53,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229,57,53,0.12) 1px, transparent 1px);
+  background-size:70px 70px;
+  transform:perspective(650px) rotateX(52deg);
+  transform-origin:bottom center;
+  animation:faqGridMove 3s linear infinite;
+  mask-image:linear-gradient(to top, black 0%, rgba(0,0,0,.45) 55%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to top, black 0%, rgba(0,0,0,.45) 55%, transparent 100%);
+  pointer-events:none;
+}
+
+@keyframes faqGridMove{
+  from{background-position:0 0;}
+  to{background-position:0 70px;}
+}
+
+.faq3d-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  pointer-events:none;
+}
+
+.faq3d-orb1{
+  width:650px;
+  height:420px;
+  top:-80px;
+  right:-120px;
+  background:radial-gradient(ellipse, rgba(229,57,53,.16) 0%, transparent 70%);
+  animation:orbFloat1 9s ease-in-out infinite;
+}
+
+.faq3d-orb2{
+  width:360px;
+  height:360px;
+  bottom:8%;
+  left:4%;
+  background:radial-gradient(ellipse, rgba(229,57,53,.08) 0%, transparent 70%);
+  animation:orbFloat2 11s ease-in-out infinite;
+}
+
+@keyframes orbFloat1{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(-35px,25px);}
+}
+
+@keyframes orbFloat2{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(25px,-25px);}
+}
+
+.faq3d-scan{
+  position:absolute;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(229,57,53,.25), transparent);
+  animation:faqScan 8s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes faqScan{
+  0%{top:0%;opacity:0;}
+  15%{opacity:1;}
+  85%{opacity:.35;}
+  100%{top:100%;opacity:0;}
+}
+
+.faq3d-wrap{
+  width:min(920px, calc(100% - 32px));
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+  perspective:1200px;
+}
+
+.faq3d-header{
+  margin-bottom:42px;
+  opacity:0;
+  transform:translateY(35px) rotateX(-14deg);
+  transition:all .9s cubic-bezier(.34,1.2,.64,1);
+}
+
+.faq3d-header.active{
+  opacity:1;
+  transform:translateY(0) rotateX(0);
+}
+
+.faq3d-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  background:rgba(229,57,53,.1);
+  border:1px solid rgba(229,57,53,.28);
+  padding:7px 15px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#ff8a80;
+  margin-bottom:18px;
+}
+
+.faq3d-tag span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#e53935;
+  box-shadow:0 0 18px rgba(229,57,53,.9);
+  animation:faqBlink 1.4s infinite;
+}
+
+@keyframes faqBlink{
+  0%,100%{opacity:1;}
+  50%{opacity:.15;}
+}
+
+.faq3d-header h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(46px, 7vw, 82px);
+  line-height:.9;
+  letter-spacing:2px;
+  margin:0;
+  color:#fff;
+}
+
+.faq3d-header h2 span{
+  color:#e53935;
+  text-shadow:0 4px 0 rgba(150,0,0,.45), 0 0 40px rgba(229,57,53,.5);
+}
+
+.faq3d-header p{
+  margin:18px 0 0;
+  max-width:560px;
+  color:rgba(255,255,255,.45);
+  font-size:15px;
+  line-height:1.7;
+}
+
+.faq3d-list{
+  display:grid;
+  gap:16px;
+}
+
+.faq3d-item{
+  position:relative;
+  overflow:hidden;
+  background:rgba(5,8,18,.78);
+  border:1px solid rgba(229,57,53,.13);
+  backdrop-filter:blur(18px);
+  box-shadow:0 24px 70px rgba(0,0,0,.45);
+  opacity:0;
+  transform:translateY(55px) rotateX(-18deg) scale(.96);
+  transform-origin:bottom center;
+  transition:
+    transform .55s cubic-bezier(.34,1.4,.64,1),
+    border-color .35s,
+    box-shadow .4s,
+    opacity .75s;
+}
+
+.faq3d-item.active-reveal{
+  opacity:1;
+  transform:translateY(0) rotateX(0) scale(1);
+}
+
+.faq3d-item::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(229,57,53,.8), transparent);
+  animation:faqCardScan 4s ease-in-out infinite;
+}
+
+@keyframes faqCardScan{
+  0%,100%{left:-100%;}
+  50%{left:100%;}
+}
+
+.faq3d-item:hover{
+  transform:translateY(-8px) rotateX(2deg) scale(1.01);
+  border-color:rgba(229,57,53,.45);
+  box-shadow:0 38px 90px rgba(0,0,0,.7), 0 0 45px rgba(229,57,53,.14);
+}
+
+.faq3d-question{
+  width:100%;
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  padding:26px 24px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  text-align:left;
+  font-family:'Barlow',sans-serif;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+.faq3d-question span{
+  transition:color .3s, transform .3s;
+}
+
+.faq3d-item.open .faq3d-question span{
+  color:#ff8a80;
+  transform:translateX(4px);
+}
+
+.faq3d-question b{
+  width:32px;
+  height:32px;
+  min-width:32px;
+  position:relative;
+  border:1px solid rgba(229,57,53,.25);
+  background:rgba(229,57,53,.08);
+  box-shadow:0 0 18px rgba(229,57,53,.12);
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+}
+
+.faq3d-question b::before,
+.faq3d-question b::after{
+  content:"";
+  position:absolute;
+  background:#e53935;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  transition:.3s;
+}
+
+.faq3d-question b::before{
+  width:14px;
+  height:2px;
+}
+
+.faq3d-question b::after{
+  width:2px;
+  height:14px;
+}
+
+.faq3d-item.open .faq3d-question b{
+  background:#e53935;
+  transform:rotate(45deg) scale(1.1);
+  box-shadow:0 0 28px rgba(229,57,53,.55);
+}
+
+.faq3d-item.open .faq3d-question b::before,
+.faq3d-item.open .faq3d-question b::after{
+  background:#fff;
+}
+
+.faq3d-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .55s cubic-bezier(.23,1,.32,1);
+}
+
+.faq3d-answer p{
+  margin:0;
+  padding:0 24px 28px;
+  color:rgba(255,255,255,.55);
+  font-size:16px;
+  line-height:1.85;
+  max-width:780px;
+}
+
+.delay1{transition-delay:.08s;}
+.delay2{transition-delay:.16s;}
+.delay3{transition-delay:.24s;}
+.delay4{transition-delay:.32s;}
+.delay5{transition-delay:.40s;}
+.delay6{transition-delay:.48s;}
+
+@media(max-width:768px){
+  .faq3d-outer{
+    padding:72px 0;
+  }
+
+  .faq3d-question{
+    font-size:15.5px;
+    padding:22px 18px;
+  }
+
+  .faq3d-answer p{
+    padding:0 18px 24px;
+    font-size:14.5px;
+  }
+
+  .faq3d-header p{
+    font-size:14px;
+  }
+}
+</style>
+
+<script>
+(function(){
+  var section = document.querySelector('#faq3d-premium');
+  if(!section) return;
+
+  var reveals = section.querySelectorAll('.reveal3d, .faq3d-item');
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        reveals.forEach(function(el){
+          el.classList.add(el.classList.contains('faq3d-item') ? 'active-reveal' : 'active');
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  observer.observe(section);
+
+  section.querySelectorAll('.faq3d-question').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq3d-item');
+      var answer = item.querySelector('.faq3d-answer');
+      var isOpen = item.classList.contains('open');
+
+      section.querySelectorAll('.faq3d-item').forEach(function(i){
+        i.classList.remove('open');
+        var a = i.querySelector('.faq3d-answer');
+        if(a) a.style.maxHeight = null;
+      });
+
+      if(!isOpen){
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<section class="reviews3d" id="reviews3d-premium">
+  <div class="reviews3d-grid"></div>
+  <div class="reviews3d-orb rorb1"></div>
+  <div class="reviews3d-orb rorb2"></div>
+  <div class="reviews3d-runner"></div>
+
+  <div class="reviews3d-head">
+    <div class="reviews3d-kicker"><span></span> Preuve Sociale</div>
+    <h2>ILS NOUS FONT <em>CONFIANCE</em></h2>
+    <p>Des clients exigeants. Des véhicules certifiés. Une expérience d’achat premium, claire et maîtrisée.</p>
+  </div>
+
+  <div class="reviews3d-marquee">
+    <div class="reviews3d-track">
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Service premium du début à la fin. Véhicule conforme, dossier clair et livraison parfaitement organisée.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Une équipe sérieuse, transparente et disponible. On sent tout de suite que les voitures sont sélectionnées avec exigence.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>J’ai trouvé une configuration rare au Maroc grâce à Auto Youssef. Accompagnement propre et très professionnel.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Transaction rapide, documents prêts, aucun stress. Exactement le niveau de service qu’on attend sur du prestige.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Le véhicule était encore plus propre qu’en photo. Historique limpide, kilométrage certifié et accueil impeccable.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Très bon suivi après l’achat. Ils restent disponibles, ce qui fait vraiment la différence.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Showroom propre, voitures bien présentées et conseils honnêtes. Une adresse de confiance.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Financement validé rapidement et démarches administratives gérées sans perte de temps.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Livraison à distance très bien suivie. Photos, vidéos, documents, tout était carré.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Deuxième achat chez Auto Youssef. Même sérieux, même qualité, même confiance.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Service premium du début à la fin. Véhicule conforme, dossier clair et livraison parfaitement organisée.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Une équipe sérieuse, transparente et disponible. On sent tout de suite que les voitures sont sélectionnées avec exigence.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>J’ai trouvé une configuration rare au Maroc grâce à Auto Youssef. Accompagnement propre et très professionnel.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Transaction rapide, documents prêts, aucun stress. Exactement le niveau de service qu’on attend sur du prestige.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Le véhicule était encore plus propre qu’en photo. Historique limpide, kilométrage certifié et accueil impeccable.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Très bon suivi après l’achat. Ils restent disponibles, ce qui fait vraiment la différence.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Showroom propre, voitures bien présentées et conseils honnêtes. Une adresse de confiance.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Financement validé rapidement et démarches administratives gérées sans perte de temps.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Livraison à distance très bien suivie. Photos, vidéos, documents, tout était carré.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+      <article class="review3d-card">
+        <div class="review3d-top">
+          <span class="review3d-stars">★★★★★</span>
+          <span class="review3d-badge">VÉRIFIÉ</span>
+        </div>
+        <p>Deuxième achat chez Auto Youssef. Même sérieux, même qualité, même confiance.</p>
+        <div class="review3d-user">
+          <strong>Client Privé</strong>
+          <small>Maroc</small>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.reviews3d,
+.reviews3d *{
+  box-sizing:border-box;
+}
+
+.reviews3d{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  position:relative;
+  overflow:hidden;
+  background:#03050a;
+  padding:95px 0;
+  font-family:'Barlow',sans-serif;
+  color:#fff;
+}
+
+.reviews3d-grid{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:75%;
+  background-image:
+    linear-gradient(rgba(229,57,53,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229,57,53,.12) 1px, transparent 1px);
+  background-size:70px 70px;
+  transform:perspective(650px) rotateX(52deg);
+  transform-origin:bottom center;
+  animation:reviewsGrid 3s linear infinite;
+  mask-image:linear-gradient(to top, black 0%, rgba(0,0,0,.45) 55%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to top, black 0%, rgba(0,0,0,.45) 55%, transparent 100%);
+}
+
+@keyframes reviewsGrid{
+  from{background-position:0 0;}
+  to{background-position:0 70px;}
+}
+
+.reviews3d-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  pointer-events:none;
+}
+
+.rorb1{
+  width:650px;
+  height:390px;
+  top:-90px;
+  right:-140px;
+  background:radial-gradient(ellipse, rgba(229,57,53,.16), transparent 70%);
+  animation:rorb1 9s ease-in-out infinite;
+}
+
+.rorb2{
+  width:340px;
+  height:340px;
+  left:3%;
+  bottom:8%;
+  background:radial-gradient(ellipse, rgba(229,57,53,.08), transparent 70%);
+  animation:rorb2 11s ease-in-out infinite;
+}
+
+@keyframes rorb1{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(-35px,24px);}
+}
+
+@keyframes rorb2{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(25px,-25px);}
+}
+
+.reviews3d-runner{
+  position:absolute;
+  top:34%;
+  left:-30%;
+  width:30%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(229,57,53,.9), transparent);
+  box-shadow:0 0 28px rgba(229,57,53,.8);
+  animation:runnerMove 5s ease-in-out infinite;
+}
+
+@keyframes runnerMove{
+  0%{left:-30%;opacity:0;}
+  15%{opacity:1;}
+  70%{opacity:.8;}
+  100%{left:100%;opacity:0;}
+}
+
+.reviews3d-head{
+  position:relative;
+  z-index:2;
+  max-width:1180px;
+  margin:0 auto 48px;
+  padding:0 24px;
+  opacity:0;
+  transform:translateY(45px) rotateX(-14deg);
+  animation:headReveal .9s .15s cubic-bezier(.34,1.25,.64,1) forwards;
+}
+
+@keyframes headReveal{
+  to{
+    opacity:1;
+    transform:translateY(0) rotateX(0);
+  }
+}
+
+.reviews3d-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(229,57,53,.28);
+  background:rgba(229,57,53,.1);
+  color:#ff8a80;
+  padding:7px 15px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.reviews3d-kicker span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#e53935;
+  box-shadow:0 0 18px rgba(229,57,53,.9);
+  animation:blinkReview 1.4s infinite;
+}
+
+@keyframes blinkReview{
+  0%,100%{opacity:1;}
+  50%{opacity:.15;}
+}
+
+.reviews3d-head h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px, 7vw, 84px);
+  line-height:.9;
+  letter-spacing:2px;
+  margin:0;
+}
+
+.reviews3d-head h2 em{
+  font-style:normal;
+  color:#e53935;
+  text-shadow:0 4px 0 rgba(150,0,0,.45), 0 0 42px rgba(229,57,53,.5);
+}
+
+.reviews3d-head p{
+  max-width:620px;
+  margin:18px 0 0;
+  color:rgba(255,255,255,.52);
+  font-size:16px;
+  line-height:1.7;
+}
+
+.reviews3d-marquee{
+  position:relative;
+  z-index:2;
+  width:100%;
+  overflow:hidden;
+  padding:18px 0 30px;
+}
+
+.reviews3d-track{
+  width:max-content;
+  display:flex;
+  gap:24px;
+  animation:reviewsMove 90s linear infinite;
+}
+
+.reviews3d-marquee:hover .reviews3d-track{
+  animation-play-state:paused;
+}
+
+@keyframes reviewsMove{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+.review3d-card{
+  position:relative;
+  width:390px;
+  min-height:245px;
+  padding:28px;
+  background:rgba(5,8,18,.82);
+  border:1px solid rgba(229,57,53,.14);
+  backdrop-filter:blur(18px);
+  box-shadow:0 25px 70px rgba(0,0,0,.5);
+  transform:perspective(900px) rotateX(0) rotateY(0);
+  transition:all .45s cubic-bezier(.34,1.56,.64,1);
+  overflow:hidden;
+}
+
+.review3d-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(229,57,53,.18), transparent 42%);
+  opacity:.35;
+  pointer-events:none;
+}
+
+.review3d-card::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(229,57,53,.8), transparent);
+  animation:cardLight 4s ease-in-out infinite;
+}
+
+@keyframes cardLight{
+  0%,100%{left:-100%;}
+  50%{left:100%;}
+}
+
+.review3d-card:hover{
+  transform:perspective(900px) translateY(-12px) rotateX(5deg) rotateY(-4deg) scale(1.02);
+  border-color:rgba(229,57,53,.55);
+  box-shadow:0 40px 95px rgba(0,0,0,.75), 0 0 50px rgba(229,57,53,.16);
+}
+
+.review3d-top{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.review3d-stars{
+  color:#e53935;
+  font-size:13px;
+  letter-spacing:3px;
+  text-shadow:0 0 18px rgba(229,57,53,.45);
+}
+
+.review3d-badge{
+  color:#7CFFB2;
+  border:1px solid rgba(124,255,178,.24);
+  background:rgba(124,255,178,.07);
+  padding:5px 9px;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.review3d-card p{
+  position:relative;
+  z-index:1;
+  margin:0 0 28px;
+  color:rgba(255,255,255,.62);
+  font-size:15px;
+  line-height:1.75;
+  font-weight:500;
+}
+
+.review3d-user{
+  position:relative;
+  z-index:1;
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:16px;
+}
+
+.review3d-user strong{
+  display:block;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+}
+
+.review3d-user small{
+  display:block;
+  margin-top:4px;
+  color:rgba(255,255,255,.32);
+  font-size:11px;
+  font-weight:700;
+}
+
+@media(max-width:768px){
+  .reviews3d{
+    padding:72px 0;
+  }
+
+  .reviews3d-head{
+    margin-bottom:32px;
+  }
+
+  .review3d-card{
+    width:305px;
+    min-height:250px;
+    padding:24px;
+  }
+
+  .reviews3d-track{
+    animation-duration:70s;
+  }
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+.ya3d-footer,
+.ya3d-footer *{box-sizing:border-box}
+
+.ya3d-footer{
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+  position:relative;
+  overflow:hidden;
+  background:#03050a;
+  color:#fff;
+  padding:82px 24px 24px;
+  font-family:'Barlow',sans-serif;
+}
+
+.ya3d-footer-grid{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:70%;
+  background-image:
+    linear-gradient(rgba(229,57,53,.11) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(229,57,53,.11) 1px,transparent 1px);
+  background-size:70px 70px;
+  transform:perspective(650px) rotateX(52deg);
+  transform-origin:bottom center;
+  animation:footerGrid 3s linear infinite;
+  mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,.45) 55%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,.45) 55%,transparent 100%);
+  pointer-events:none;
+}
+
+@keyframes footerGrid{
+  from{background-position:0 0}
+  to{background-position:0 70px}
+}
+
+.ya3d-footer-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  pointer-events:none;
+}
+
+.ya3d-footer-orb1{
+  width:650px;height:390px;
+  top:-120px;right:-140px;
+  background:radial-gradient(ellipse,rgba(229,57,53,.16),transparent 70%);
+  animation:footerOrb1 9s ease-in-out infinite;
+}
+
+.ya3d-footer-orb2{
+  width:360px;height:360px;
+  bottom:4%;left:4%;
+  background:radial-gradient(ellipse,rgba(229,57,53,.08),transparent 70%);
+  animation:footerOrb2 11s ease-in-out infinite;
+}
+
+@keyframes footerOrb1{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(-34px,24px)}
+}
+
+@keyframes footerOrb2{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(24px,-24px)}
+}
+
+.ya3d-footer-scan{
+  position:absolute;
+  left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(229,57,53,.26),transparent);
+  animation:footerScan 8s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes footerScan{
+  0%{top:0%;opacity:0}
+  15%{opacity:1}
+  85%{opacity:.35}
+  100%{top:100%;opacity:0}
+}
+
+.ya3d-footer-wrap{
+  max-width:1280px;
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.ya3d-footer-top{
+  display:grid;
+  grid-template-columns:1.4fr .8fr .8fr .8fr;
+  gap:34px;
+  padding-bottom:38px;
+  border-bottom:1px solid rgba(229,57,53,.16);
+  opacity:0;
+  transform:translateY(60px) rotateX(-16deg);
+  transform-origin:bottom center;
+  transition:all .95s cubic-bezier(.34,1.25,.64,1);
+}
+
+.ya3d-footer.is-visible .ya3d-footer-top{
+  opacity:1;
+  transform:translateY(0) rotateX(0);
+}
+
+.ya3d-footer-news{
+  position:relative;
+  padding:30px;
+  background:rgba(5,8,18,.78);
+  border:1px solid rgba(229,57,53,.15);
+  backdrop-filter:blur(18px);
+  box-shadow:0 25px 75px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+
+.ya3d-footer-news::before{
+  content:"";
+  position:absolute;
+  top:0;left:-100%;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(229,57,53,.85),transparent);
+  animation:footerCardScan 4s ease-in-out infinite;
+}
+
+@keyframes footerCardScan{
+  0%,100%{left:-100%}
+  50%{left:100%}
+}
+
+.ya3d-footer-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  background:rgba(229,57,53,.1);
+  border:1px solid rgba(229,57,53,.28);
+  padding:7px 14px;
+  color:#ff8a80;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.ya3d-footer-kicker span{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:#e53935;
+  box-shadow:0 0 18px rgba(229,57,53,.9);
+  animation:footerBlink 1.4s infinite;
+}
+
+@keyframes footerBlink{
+  0%,100%{opacity:1}
+  50%{opacity:.15}
+}
+
+.ya3d-footer-news h2{
+  font-family:'Bebas Neue',sans-serif;
+  margin:0 0 16px;
+  font-size:clamp(48px,5.5vw,72px);
+  line-height:.9;
+  letter-spacing:2px;
+  color:#fff;
+}
+
+.ya3d-footer-news h2 span{
+  color:#e53935;
+  text-shadow:0 4px 0 rgba(150,0,0,.45),0 0 42px rgba(229,57,53,.5);
+}
+
+.ya3d-footer-news p{
+  margin:0 0 22px;
+  color:rgba(255,255,255,.56);
+  font-size:15px;
+  line-height:1.75;
+  max-width:560px;
+}
+
+.ya3d-footer-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:14px;
+}
+
+.ya3d-footer-field label{
+  display:block;
+  margin-bottom:8px;
+  color:rgba(255,255,255,.82);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.ya3d-footer-field input{
+  width:100%;
+  height:54px;
+  border:1px solid rgba(229,57,53,.22);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  padding:0 16px;
+  font-size:14px;
+  outline:none;
+  font-family:'Barlow',sans-serif;
+  transition:.3s;
+}
+
+.ya3d-footer-field input::placeholder{
+  color:rgba(255,255,255,.28);
+}
+
+.ya3d-footer-field input:focus{
+  border-color:#e53935;
+  box-shadow:0 0 0 3px rgba(229,57,53,.12),0 0 24px rgba(229,57,53,.16);
+}
+
+.ya3d-footer-submit{
+  width:100%;
+  min-height:56px;
+  border:1px solid rgba(229,57,53,.42);
+  background:rgba(229,57,53,.1);
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .32s cubic-bezier(.34,1.56,.64,1);
+  font-family:'Barlow',sans-serif;
+}
+
+.ya3d-footer-submit:hover{
+  background:#e53935;
+  border-color:#e53935;
+  transform:translateY(-3px);
+  box-shadow:0 0 28px rgba(229,57,53,.45);
+}
+
+.ya3d-footer-note{
+  margin-top:14px!important;
+  font-size:12px!important;
+  line-height:1.65!important;
+  color:rgba(255,255,255,.38)!important;
+}
+
+.ya3d-footer-socials{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:26px;
+  flex-wrap:wrap;
+}
+
+.ya3d-footer-social{
+  width:42px;height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(229,57,53,.28);
+  background:rgba(229,57,53,.06);
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+}
+
+.ya3d-footer-social:hover{
+  background:#e53935;
+  border-color:#e53935;
+  transform:translateY(-4px) scale(1.08);
+  box-shadow:0 0 24px rgba(229,57,53,.45);
+}
+
+.ya3d-footer-col{
+  padding-top:28px;
+}
+
+.ya3d-footer-col h3{
+  font-family:'Bebas Neue',sans-serif;
+  margin:0 0 20px;
+  color:#fff;
+  font-size:24px;
+  letter-spacing:2px;
+}
+
+.ya3d-footer-links{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:13px;
+}
+
+.ya3d-footer-links a{
+  color:rgba(255,255,255,.56);
+  text-decoration:none;
+  font-size:15px;
+  line-height:1.55;
+  transition:.25s;
+}
+
+.ya3d-footer-links a:hover{
+  color:#ff8a80;
+  padding-left:6px;
+}
+
+.ya3d-footer-bottom{
+  padding-top:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  opacity:0;
+  transform:translateY(18px);
+  transition:all .8s .25s ease;
+}
+
+.ya3d-footer.is-visible .ya3d-footer-bottom{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.ya3d-footer-mini-links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+
+.ya3d-footer-mini-links a,
+.ya3d-footer-copy,
+.ya3d-footer-toplink{
+  color:rgba(255,255,255,.48);
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.ya3d-footer-mini-links a:hover,
+.ya3d-footer-toplink:hover{
+  color:#fff;
+}
+
+.ya3d-footer-toplink{
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+@media(max-width:1100px){
+  .ya3d-footer-top{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:768px){
+  .ya3d-footer{
+    padding:62px 16px 20px;
+  }
+
+  .ya3d-footer-top{
+    grid-template-columns:1fr;
+    gap:26px;
+  }
+
+  .ya3d-footer-news{
+    padding:26px 20px;
+  }
+
+  .ya3d-footer-form{
+    grid-template-columns:1fr;
+  }
+
+  .ya3d-footer-bottom{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .ya3d-footer-mini-links{
+    gap:14px 18px;
+  }
+}
+</style>
+
+<div id="contact"></div>
+<footer class="ya3d-footer" id="ya3d-footer">
+  <div class="ya3d-footer-grid"></div>
+  <div class="ya3d-footer-orb ya3d-footer-orb1"></div>
+  <div class="ya3d-footer-orb ya3d-footer-orb2"></div>
+  <div class="ya3d-footer-scan"></div>
+
+  <div class="ya3d-footer-wrap">
+    <div class="ya3d-footer-top">
+
+      <div class="ya3d-footer-news">
+        <div class="ya3d-footer-kicker"><span></span> Nouveautés Auto Youssef</div>
+        <h2>NE RATEZ <span>RIEN</span></h2>
+
+        <p>Recevez les nouveaux véhicules, les offres privées et les annonces premium directement par e-mail.</p>
+
+        <form class="ya3d-footer-form">
+          <div class="ya3d-footer-field">
+            <label>Adresse e-mail</label>
+            <input type="email" placeholder="Votre adresse e-mail">
+          </div>
+
+          <div class="ya3d-footer-field">
+            <label>Téléphone</label>
+            <input type="text" placeholder="Votre numéro">
+          </div>
+        </form>
+
+        <button class="ya3d-footer-submit" type="button">S'inscrire</button>
+
+        <p class="ya3d-footer-note">
+          En vous inscrivant, vous acceptez de recevoir nos informations commerciales, nos offres et nos actualités automobiles.
+        </p>
+
+        <div class="ya3d-footer-socials">
+          <a href="https://instagram.com/" class="ya3d-footer-social" target="_blank" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2H17A5 5 0 0 1 22 7V17A5 5 0 0 1 17 22H7A5 5 0 0 1 2 17V7A5 5 0 0 1 7 2Z" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8A4 4 0 0 1 16 11.37Z" stroke="currentColor" stroke-width="2"/><path d="M17.5 6.5H17.51" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+
+          <a href="https://facebook.com/" class="ya3d-footer-social" target="_blank" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 2H15C13.67 2 12.4 2.53 11.46 3.46C10.53 4.4 10 5.67 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73 14.11 6.48 14.29 6.29C14.48 6.11 14.73 6 15 6H18V2Z" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+
+          <a href="https://youtube.com/" class="ya3d-footer-social" target="_blank" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42A2.78 2.78 0 0 0 20.6 4.48C18.88 4 12 4 12 4S5.12 4 3.4 4.48A2.78 2.78 0 0 0 1.46 6.42A29 29 0 0 0 1 12A29 29 0 0 0 1.46 17.58A2.78 2.78 0 0 0 3.4 19.52C5.12 20 12 20 12 20S18.88 20 20.6 19.52A2.78 2.78 0 0 0 22.54 17.58A29 29 0 0 0 23 12A29 29 0 0 0 22.54 6.42Z" stroke="currentColor" stroke-width="2"/><path d="M10 15L15 12L10 9V15Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </a>
+
+          <a href="https://maps.app.goo.gl/rUhRGCBFRe1vFVWG6" class="ya3d-footer-social" target="_blank" aria-label="Google Maps">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 10C21 16 12 22 12 22C12 22 3 16 3 10A9 9 0 0 1 21 10Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="ya3d-footer-col">
+        <h3>Entreprise</h3>
+        <ul class="ya3d-footer-links">
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#cars">Nos véhicules</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://maps.app.goo.gl/rUhRGCBFRe1vFVWG6" target="_blank">Notre emplacement</a></li>
+        </ul>
+      </div>
+
+      <div class="ya3d-footer-col">
+        <h3>Service client</h3>
+        <ul class="ya3d-footer-links">
+          <li><a href="#contact">Nous contacter</a></li>
+          <li><a href="#contact">Mon compte</a></li>
+          <li><a href="#cars">Voir les annonces</a></li>
+          <li><a href="#contact">Demander des informations</a></li>
+        </ul>
+      </div>
+
+      <div class="ya3d-footer-col">
+        <h3>Découvrir plus</h3>
+        <ul class="ya3d-footer-links">
+          <li><a href="#cars">Offres disponibles</a></li>
+          <li><a href="#cars">Véhicules premium</a></li>
+          <li><a href="#cars">Nouveaux modèles</a></li>
+          <li><a href="https://maps.app.goo.gl/rUhRGCBFRe1vFVWG6" target="_blank">Google Maps</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ya3d-footer-bottom">
+      <div class="ya3d-footer-mini-links">
+        <a href="#privacy">Confidentialité</a>
+        <a href="#terms">Conditions</a>
+        <a href="#contact">Contact</a>
+        <a href="#cars">Catalogue</a>
+      </div>
+
+      <div class="ya3d-footer-copy">© 2026 Auto Youssef. Tous droits réservés.</div>
+
+      <a href="#top" class="ya3d-footer-toplink">Retour en haut</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var footer = document.querySelector('#ya3d-footer');
+  if(!footer) return;
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        footer.classList.add('is-visible');
+        observer.unobserve(footer);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  observer.observe(footer);
+})();
+</script>
+
+<style>
+#yac-w,#yac-w *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+
+#yac-notifs{position:fixed;bottom:110px;right:28px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:2147483646;pointer-events:none}
+.yn{background:#0d0d0d;border:1px solid rgba(229,57,53,0.3);border-radius:20px 20px 0 20px;padding:10px 16px;font-size:12.5px;color:#fff;white-space:nowrap;pointer-events:all;cursor:pointer;opacity:0;transform:translateY(12px);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 24px rgba(0,0,0,0.6)}
+.yn:hover{transform:translateY(-2px)!important;border-color:rgba(229,57,53,0.6)}
+
+#yac-btn{position:fixed;bottom:28px;right:28px;width:65px;height:65px;border:none;cursor:pointer;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c62828,#8b0000);box-shadow:0 0 0 4px rgba(229,57,53,0.15),0 8px 32px rgba(229,57,53,0.5);z-index:2147483647;display:flex;align-items:center;justify-content:center;animation:yacFloat 3s ease-in-out infinite;transition:all 0.3s;overflow:hidden;padding:0}
+#yac-btn:hover{animation:none;transform:scale(1.1);box-shadow:0 0 0 6px rgba(229,57,53,0.2),0 12px 40px rgba(229,57,53,0.7)}
+@keyframes yacFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+#yac-btn-logo{width:65px;height:65px;border-radius:50%;object-fit:cover;animation:yacBob 2s ease-in-out infinite;display:block}
+@keyframes yacBob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.03)}}
+
+#yac-close-x{display:none;align-items:center;justify-content:center;position:absolute;inset:0;background:rgba(139,0,0,0.95);border-radius:50%}
+
+#yac-pulse-ring{position:fixed;bottom:28px;right:28px;width:65px;height:65px;border-radius:50%;border:2px solid rgba(229,57,53,0.4);animation:yacRing 2s ease-out infinite;pointer-events:none;z-index:2147483645}
+@keyframes yacRing{0%{transform:scale(1);opacity:0.8}100%{transform:scale(1.9);opacity:0}}
+
+#yac-online-dot{position:absolute;bottom:2px;right:2px;width:14px;height:14px;background:#4ade80;border-radius:50%;border:2.5px solid #0d0d0d;animation:yacBlink 2s infinite;z-index:1}
+@keyframes yacBlink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+#yac-panel{position:fixed;bottom:0;right:28px;width:400px;height:calc(100vh - 40px);max-height:700px;background:#0d0d0d;border:1px solid rgba(229,57,53,0.15);border-bottom:none;border-radius:16px 16px 0 0;box-shadow:-10px 0 60px rgba(0,0,0,0.8);display:none;flex-direction:column;overflow:hidden;z-index:2147483646;transform-origin:bottom right}
+#yac-panel.on{display:flex;animation:yacPanelIn 0.45s cubic-bezier(0.34,1.3,0.64,1)}
+@keyframes yacPanelIn{from{opacity:0;transform:translateY(40px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+#yac-head{background:#111;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0}
+#yac-head-left{display:flex;align-items:center;gap:12px}
+#yac-logo-circle{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(229,57,53,0.4);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;box-shadow:0 0 12px rgba(229,57,53,0.2);overflow:hidden}
+#yac-logo-circle img{width:46px;height:46px;border-radius:50%;object-fit:cover;animation:yacBob 2s ease-in-out infinite}
+#yac-logo-dot{position:absolute;bottom:0;right:0;width:12px;height:12px;background:#4ade80;border-radius:50%;border:2px solid #111;animation:yacBlink 2s infinite;z-index:2}
+
+#yac-brand{display:flex;flex-direction:column;gap:1px}
+#yac-brand-name{color:#fff;font-size:13px;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:6px}
+#yac-brand-tag{background:rgba(229,57,53,0.15);color:#e53935;font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:3px}
+#yac-brand-sub{color:rgba(255,255,255,0.35);font-size:10px;letter-spacing:2px;text-transform:uppercase}
+#yac-brand-status{display:flex;align-items:center;gap:5px;margin-top:2px}
+#yac-sdot{width:5px;height:5px;background:#4ade80;border-radius:50%;animation:yacBlink 2s infinite}
+#yac-stxt{color:rgba(255,255,255,0.5);font-size:10px}
+
+#yac-head-right{display:flex;align-items:center;gap:8px}
+.yac-hbtn{width:32px;height:32px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+.yac-hbtn:hover{background:rgba(255,255,255,0.1)}
+
+.yac-date-sep{display:flex;align-items:center;gap:10px;margin:8px 0}
+.yac-date-sep::before,.yac-date-sep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.06)}
+.yac-date-sep span{color:rgba(255,255,255,0.25);font-size:10px;letter-spacing:2px;text-transform:uppercase}
+
+#yac-msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+#yac-msgs::-webkit-scrollbar{width:2px}
+#yac-msgs::-webkit-scrollbar-thumb{background:rgba(229,57,53,0.3);border-radius:2px}
+
+.yac-row{display:flex;align-items:flex-end;gap:9px;animation:yacMsgIn 0.4s cubic-bezier(0.34,1.3,0.64,1)}
+@keyframes yacMsgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.yac-ai-row{justify-content:flex-start}.yac-user-row{justify-content:flex-end}
+
+.yac-av-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0}
+.yac-av{width:34px;height:34px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(229,57,53,0.3)}
+.yac-av img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.yac-ts{color:rgba(255,255,255,0.2);font-size:10px}
+
+.yac-msg-col{display:flex;flex-direction:column;gap:4px;max-width:75%}
+.yac-bubble{padding:11px 14px;font-size:13.5px;line-height:1.6;word-wrap:break-word}
+.yac-ai-bubble{background:#1a1a1a;border-radius:0 16px 16px 16px;color:#e8e8e8}
+.yac-user-bubble{background:linear-gradient(135deg,#8b0000,#c62828,#e53935);color:#fff;border-radius:16px 16px 0 16px}
+
+.yac-meta{display:flex;align-items:center;gap:4px}
+.yac-time{color:rgba(255,255,255,0.2);font-size:10px}
+.yac-check{color:#4ade80;font-size:10px}
+
+.yac-typing-bbl{background:#1a1a1a;border-radius:0 16px 16px 16px;padding:13px 16px}
+.yac-dots{display:flex;gap:4px;align-items:center}
+.yac-dots span{width:6px;height:6px;background:#e53935;border-radius:50%;animation:yacDot 1.4s ease infinite;opacity:0.4}
+.yac-dots span:nth-child(2){animation-delay:0.2s}.yac-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes yacDot{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-5px);opacity:1}}
+
+#yac-chips{padding:10px 14px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;background:#111;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0}
+#yac-chips::-webkit-scrollbar{display:none}
+.yac-chip{background:rgba(229,57,53,0.08);color:rgba(255,255,255,0.6);border:1px solid rgba(229,57,53,0.2);padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s;border-radius:20px}
+.yac-chip:hover{background:#e53935;color:#fff;border-color:#e53935;transform:translateY(-2px)}
+
+#yac-input-wrap{padding:12px 14px;background:#111;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:10px;align-items:center;flex-shrink:0}
+#yac-inp{flex:1;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:25px;padding:11px 18px;font-size:13.5px;color:#fff;outline:none;transition:all 0.25s;font-family:inherit}
+#yac-inp:focus{border-color:rgba(229,57,53,0.4);background:#1f1f1f}
+#yac-inp::placeholder{color:rgba(255,255,255,0.2)}
+#yac-send{width:42px;height:42px;background:#e53935;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+#yac-send:hover{transform:scale(1.12);box-shadow:0 4px 20px rgba(229,57,53,0.6)}
+
+#yac-footer{padding:8px;text-align:center;background:#111;border-top:1px solid rgba(255,255,255,0.04);flex-shrink:0}
+#yac-footer span{font-size:9px;letter-spacing:2.5px;color:rgba(255,255,255,0.18);text-transform:uppercase}
+#yac-footer strong{color:#e53935}
+
+@media(max-width:440px){#yac-panel{width:100vw;right:0;border-radius:16px 16px 0 0}#yac-btn,#yac-pulse-ring{right:16px;bottom:16px}#yac-notifs{right:16px;bottom:100px}}
+</style>
+
+<div id="yac-pulse-ring"></div>
+
+<div id="yac-notifs">
+  <div class="yn" id="yn1" onclick="yacOpen()">🚗 Trouvez votre voiture idéale !</div>
+  <div class="yn" id="yn2" onclick="yacOpen()">💰 Budget limité ? On a des options !</div>
+  <div class="yn" id="yn3" onclick="yacOpen()">👋 Bonjour ! Comment puis-je vous aider ?</div>
+</div>
+
+<button id="yac-btn" onclick="yacToggle()">
+  <div id="yac-online-dot"></div>
+  <img id="yac-btn-logo" src="https://i.postimg.cc/BL3PGSTL/image.png" alt="YOUSSEF"/>
+  <div id="yac-close-x">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </div>
+</button>
+
+<div id="yac-panel">
+  <div id="yac-head">
+    <div id="yac-head-left">
+      <div id="yac-logo-circle">
+        <img src="https://i.postimg.cc/BL3PGSTL/image.png" alt="YOUSSEF"/>
+        <div id="yac-logo-dot"></div>
+      </div>
+      <div id="yac-brand">
+        <div id="yac-brand-name">
+          Youssef Auto
+          <span id="yac-brand-tag">AI</span>
+        </div>
+        <div id="yac-brand-sub">Assistant • YOUSSEF</div>
+        <div id="yac-brand-status">
+          <span id="yac-sdot"></span>
+          <span id="yac-stxt">En ligne maintenant</span>
+        </div>
+      </div>
+    </div>
+    <div id="yac-head-right">
+      <button class="yac-hbtn" title="Historique">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </button>
+      <button class="yac-hbtn" onclick="yacToggle()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="yac-msgs">
+    <div class="yac-date-sep"><span>Aujourd'hui</span></div>
+    <div class="yac-row yac-ai-row">
+      <div class="yac-av-wrap">
+        <div class="yac-av">
+          <img src="https://i.postimg.cc/BL3PGSTL/image.png" alt="AI"/>
+        </div>
+        <span class="yac-ts" id="yac-init-time"></span>
+      </div>
+      <div class="yac-msg-col">
+        <div class="yac-bubble yac-ai-bubble">
+          Bonjour ! 👋<br>
+          Comment puis-je vous aider à trouver votre voiture idéale ?
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="yac-chips">
+    <button class="yac-chip" onclick="yacQ('Quelles voitures avez-vous ?')">🚗 Catalogue</button>
+    <button class="yac-chip" onclick="yacQ('Je veux contacter un vendeur')">📞 Contact</button>
+    <button class="yac-chip" onclick="yacQ('J\'ai une réclamation')">⚠️ Réclamation</button>
+    <button class="yac-chip" onclick="yacQ('Financement disponible ?')">🏦 Financement</button>
+  </div>
+
+  <div id="yac-input-wrap">
+    <input id="yac-inp" type="text" placeholder="Tapez votre message..." onkeypress="if(event.key==='Enter')yacSend()"/>
+    <button id="yac-send" onclick="yacSend()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+
+  <div id="yac-footer">
+    <span>POWERED BY <strong>YOUSSEF AUTO AI</strong></span>
+  </div>
+</div>
+
+<script>
+(function(){
+  var LOGO='https://i.postimg.cc/BL3PGSTL/image.png';
+  var S={
+    open:false,
+    session:'yac_'+Date.now()+'_'+Math.random().toString(36).substr(2,5),
+    url:'https://issammalihq.app.n8n.cloud/webhook/2948b355-b2cf-4f5a-9198-85fbc2e3651f/chat'
+  };
+
+  function yacTime(){
+    var d=new Date();
+    return d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes();
+  }
+
+  var el=document.getElementById('yac-init-time');
+  if(el)el.textContent=yacTime();
+
+  var notifs=[
+    {id:'yn1',delay:1500,out:6000},
+    {id:'yn2',delay:4500,out:9000},
+    {id:'yn3',delay:8000,out:12500}
+  ];
+  notifs.forEach(function(n){
+    setTimeout(function(){
+      var el=document.getElementById(n.id);
+      if(!el||S.open)return;
+      el.style.opacity='1';el.style.transform='translateY(0)';
+    },n.delay);
+    setTimeout(function(){
+      var el=document.getElementById(n.id);
+      if(!el)return;
+      el.style.opacity='0';el.style.transform='translateY(12px)';
+    },n.out);
+  });
+
+  window.yacToggle=function(){
+    S.open=!S.open;
+    var panel=document.getElementById('yac-panel');
+    var btnLogo=document.getElementById('yac-btn-logo');
+    var closeX=document.getElementById('yac-close-x');
+    var notifWrap=document.getElementById('yac-notifs');
+    var ring=document.getElementById('yac-pulse-ring');
+    if(S.open){
+      panel.classList.add('on');
+      if(btnLogo)btnLogo.style.display='none';
+      if(closeX)closeX.style.display='flex';
+      if(notifWrap)notifWrap.style.display='none';
+      if(ring)ring.style.animation='none';
+      setTimeout(function(){var i=document.getElementById('yac-inp');if(i)i.focus();},400);
+    } else {
+      panel.classList.remove('on');
+      if(btnLogo)btnLogo.style.display='block';
+      if(closeX)closeX.style.display='none';
+      if(ring)ring.style.animation='yacRing 2s ease-out infinite';
+    }
+  };
+
+  window.yacOpen=function(){if(!S.open)yacToggle();};
+  window.yacQ=function(t){var i=document.getElementById('yac-inp');if(i){i.value=t;yacSend();}};
+
+  window.yacSend=function(){
+    var inp=document.getElementById('yac-inp');
+    var t=inp.value.trim();
+    if(!t)return;
+    yacAdd(t,'user');
+    inp.value='';
+    var typing=yacTyping();
+    var xhr=new XMLHttpRequest();
+    xhr.open('POST',S.url,true);
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4){
+        typing.remove();
+        var r='Désolé, une erreur. Contactez-nous directement 🚗';
+        if(xhr.status===200){try{var d=JSON.parse(xhr.responseText);r=d.output||d.text||d.message||r;}catch(e){}}
+        yacAdd(r,'bot');
+      }
+    };
+    xhr.send(JSON.stringify({sessionId:S.session,chatInput:t,action:'sendMessage'}));
+  };
+
+  function yacAv(){
+    return '<div class="yac-av-wrap"><div class="yac-av"><img src="'+LOGO+'" alt="AI"/></div><span class="yac-ts">'+yacTime()+'</span></div>';
+  }
+
+  function yacAdd(text,type){
+    var m=document.getElementById('yac-msgs');
+    var row=document.createElement('div');
+    row.className='yac-row '+(type==='user'?'yac-user-row':'yac-ai-row');
+    if(type!=='user')row.innerHTML=yacAv();
+    var col=document.createElement('div');
+    col.className='yac-msg-col';
+    var b=document.createElement('div');
+    b.className='yac-bubble '+(type==='user'?'yac-user-bubble':'yac-ai-bubble');
+    b.innerHTML=text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:#ff6b6b">$1</strong>');
+    col.appendChild(b);
+    if(type==='user'){
+      var meta=document.createElement('div');
+      meta.className='yac-meta';
+      meta.style.justifyContent='flex-end';
+      meta.innerHTML='<span class="yac-time">'+yacTime()+'</span><span class="yac-check">✓✓</span>';
+      col.appendChild(meta);
+    }
+    row.appendChild(col);
+    m.appendChild(row);
+    m.scrollTop=m.scrollHeight;
+    return row;
+  }
+
+  function yacTyping(){
+    var m=document.getElementById('yac-msgs');
+    var row=document.createElement('div');
+    row.className='yac-row yac-ai-row';
+    row.innerHTML=yacAv();
+    var b=document.createElement('div');
+    b.className='yac-bubble yac-typing-bbl';
+    b.innerHTML='<div class="yac-dots"><span></span><span></span><span></span></div>';
+    row.appendChild(b);
+    m.appendChild(row);
+    m.scrollTop=m.scrollHeight;
+    return row;
+  }
+})();
+</script>
+</body>
+</html>
