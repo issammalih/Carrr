@@ -1,4 +1,4 @@
-const workerUrl = "https://carschabtojdid.issammalyh2.workers.dev";
+const workerUrl = "https://carschatbojdid.issammalyh2.workers.dev/";
 const chatbotHTML = `
 <div class="auto-chatbot-tooltip" id="autoTooltip">
   Can I assist you ? 👋
