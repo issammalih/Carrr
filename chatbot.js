@@ -5,13 +5,13 @@ const chatbotHTML = `
 </div>
 
 <div class="auto-chatbot-button" id="chatbotButton">
-  <img src="https://i.imgur.com/2sRQ8DZ.png" alt="logo">
+ <img src="https://i.postimg.cc/Vv5Wpc4P/Chat-GPT-Image-6-mai-2026-20-32-38.png" alt="logo">
   <div class="auto-chatbot-notification">1</div>
 </div>
 
 <div class="auto-chatbot" id="autoChatbot">
   <div class="auto-chatbot-header">
-    <img src="https://i.imgur.com/2sRQ8DZ.png" alt="Auto Trouvez">
+   <img src="https://i.postimg.cc/Vv5Wpc4P/Chat-GPT-Image-6-mai-2026-20-32-38.png" alt="logo">
     <div>
       <h3>Auto Trouvez AI</h3>
       <p>Assistant intelligent • En ligne</p>
