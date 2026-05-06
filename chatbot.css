@@ -1,62 +1,54 @@
 :root{
   --red:#ff2020;
-  --dark:#0e0e12;
   --gray:#a1a1aa;
 }
 
 .auto-chatbot-button{
   position:fixed;
-  right:25px;
-  bottom:25px;
-  width:118px;
-  height:78px;
-  background:transparent;
-  border:none;
-  box-shadow:none;
+  right:18px;
+  bottom:18px;
   z-index:999999;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  width:auto;
+  height:auto;
   overflow:visible;
   animation:logoFloat 2.5s infinite;
 }
 
-.auto-chatbot-button:hover{
-  transform:scale(1.06);
-}
-
 .auto-chatbot-button img{
-  width:118px;
+  width:120px;
   height:auto;
   object-fit:contain;
   display:block;
-  filter:drop-shadow(0 0 16px rgba(255,32,32,.7));
+  background:transparent !important;
+  filter:drop-shadow(0 0 14px rgba(255,0,0,.7));
 }
 
 .auto-chatbot-notification{
   position:absolute;
-  top:0;
-  right:0;
+  top:-4px;
+  right:-4px;
   width:24px;
   height:24px;
-  background:var(--red);
+  background:#ff2020;
   border-radius:50%;
-  color:white;
-  font-size:12px;
-  font-weight:800;
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 0 14px rgba(255,32,32,.8);
-  animation:notifAnim 1.2s infinite;
+  color:white;
+  font-size:12px;
+  font-weight:700;
+  box-shadow:0 0 15px rgba(255,0,0,.8);
 }
 
 .auto-chatbot-tooltip{
   position:fixed;
   right:150px;
-  bottom:42px;
-  background:#111117;
+  bottom:40px;
+  background:#0d0d11;
   color:white;
   padding:12px 18px;
   border-radius:14px;
@@ -96,12 +88,12 @@
 }
 
 .auto-chatbot-header img{
-  width:86px;
+  width:95px;
   height:auto;
   object-fit:contain;
   background:transparent;
   border:none;
-  filter:drop-shadow(0 0 12px rgba(255,32,32,.45));
+  filter:drop-shadow(0 0 10px rgba(255,0,0,.4));
 }
 
 .auto-chatbot-header h3{
@@ -148,7 +140,7 @@
 }
 
 .user-message{
-  background:var(--red);
+  background:#ff2020;
   color:white;
   align-self:flex-end;
 }
@@ -172,7 +164,7 @@
 }
 
 .auto-chatbot-input button{
-  background:var(--red);
+  background:#ff2020;
   border:none;
   color:white;
   width:55px;
@@ -182,22 +174,35 @@
 }
 
 @keyframes logoFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-4px);}
-}
-
-@keyframes notifAnim{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.25);}
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-4px);
+  }
 }
 
 @keyframes tooltipAnim{
-  0%{opacity:0;transform:translateY(10px);}
-  15%,80%{opacity:1;transform:translateY(0);}
-  100%{opacity:0;}
+  0%{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  15%,80%{
+    opacity:1;
+    transform:translateY(0);
+  }
+  100%{
+    opacity:0;
+  }
 }
 
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(10px);}
-  to{opacity:1;transform:translateY(0);}
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
