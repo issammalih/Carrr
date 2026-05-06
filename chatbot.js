@@ -1,17 +1,17 @@
-const workerUrl = "https://carschatbojdid.issammalyh2.workers.dev/";
+const workerUrl = "https://carschatbojdid.issammalyh2.workers.dev";
+
 const chatbotHTML = `
 <div class="auto-chatbot-tooltip" id="autoTooltip">
   Can I assist you ? 👋
 </div>
 
 <div class="auto-chatbot-button" id="chatbotButton">
- <img src="https://i.postimg.cc/Vv5Wpc4P/Chat-GPT-Image-6-mai-2026-20-32-38.png" alt="logo">
   <div class="auto-chatbot-notification">1</div>
 </div>
 
 <div class="auto-chatbot" id="autoChatbot">
   <div class="auto-chatbot-header">
-   <img src="https://i.postimg.cc/Vv5Wpc4P/Chat-GPT-Image-6-mai-2026-20-32-38.png" alt="logo">
+    <img src="https://i.postimg.cc/Vv5Wpc4P/Chat-GPT-Image-6-mai-2026-20-32-38.png" alt="logo">
     <div>
       <h3>Auto Trouvez AI</h3>
       <p>Assistant intelligent • En ligne</p>
@@ -47,6 +47,7 @@ let history = [];
 
 button.addEventListener("click", () => {
   chatbot.style.display = "flex";
+
   const tooltip = document.getElementById("autoTooltip");
   if (tooltip) tooltip.style.display = "none";
 
