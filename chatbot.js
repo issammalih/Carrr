@@ -1,4 +1,4 @@
-const workerUrl = "PASTE_YOUR_WORKER_URL_HERE";
+const workerUrl = "https://im-chatbotarabic.issammalyh2.workers.dev";
 
 const chatbotHTML = `
 <div class="auto-chatbot-tooltip" id="autoTooltip">
