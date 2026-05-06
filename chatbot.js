@@ -11,44 +11,27 @@ const chatbotHTML = `
 </div>
 
 <div class="auto-chatbot" id="autoChatbot">
-
   <div class="auto-chatbot-header">
-    <img src="https://i.imgur.com/2sRQ8DZ.png">
-
+    <img src="https://i.imgur.com/2sRQ8DZ.png" alt="Auto Trouvez">
     <div>
       <h3>Auto Trouvez AI</h3>
       <p>Assistant intelligent • En ligne</p>
     </div>
-
-    <div class="auto-chatbot-close" id="closeChatbot">
-      ×
-    </div>
+    <div class="auto-chatbot-close" id="closeChatbot">×</div>
   </div>
 
   <div class="auto-chatbot-messages" id="chatMessages">
-
     <div class="auto-message bot-message">
       Bonjour 👋<br><br>
       Je suis l’assistant intelligent Auto Trouvez.<br>
       Comment puis-je vous aider aujourd’hui ?
     </div>
-
   </div>
 
   <div class="auto-chatbot-input">
-
-    <input
-      type="text"
-      id="chatInput"
-      placeholder="Écrivez votre message..."
-    >
-
-    <button id="sendMessage">
-      ➤
-    </button>
-
+    <input type="text" id="chatInput" placeholder="Écrivez votre message...">
+    <button id="sendMessage">➤</button>
   </div>
-
 </div>
 `;
 
@@ -64,29 +47,39 @@ const messages = document.getElementById("chatMessages");
 let history = [];
 
 button.addEventListener("click", () => {
-
   chatbot.style.display = "flex";
+  const tooltip = document.getElementById("autoTooltip");
+  if (tooltip) tooltip.style.display = "none";
 
-  document.getElementById("autoTooltip").style.display = "none";
-
-  button.querySelector(".auto-chatbot-notification").style.display = "none";
+  const badge = button.querySelector(".auto-chatbot-notification");
+  if (badge) badge.style.display = "none";
 });
 
 closeBtn.addEventListener("click", () => {
   chatbot.style.display = "none";
 });
 
+function escapeHTML(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function addMessage(type, text) {
+  const div = document.createElement("div");
+  div.className = `auto-message ${type}-message`;
+  div.innerHTML = escapeHTML(text).replace(/\n/g, "<br>");
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
 async function sendMessage() {
-
   const text = input.value.trim();
-
   if (!text) return;
 
-  messages.innerHTML += `
-    <div class="auto-message user-message">
-      ${text}
-    </div>
-  `;
+  addMessage("user", text);
 
   history.push({
     role: "user",
@@ -95,16 +88,9 @@ async function sendMessage() {
 
   input.value = "";
 
-  messages.innerHTML += `
-    <div class="auto-message bot-message" id="typing">
-      Typing...
-    </div>
-  `;
-
-  messages.scrollTop = messages.scrollHeight;
+  const typing = addMessage("bot", "Typing...");
 
   try {
-
     const response = await fetch(workerUrl, {
       method: "POST",
       headers: {
@@ -118,47 +104,30 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    document.getElementById("typing").remove();
+    typing.remove();
 
-    messages.innerHTML += `
-      <div class="auto-message bot-message">
-        ${data.reply}
-      </div>
-    `;
+    const reply = data.reply || data.error || "AI temporarily unavailable.";
+    addMessage("bot", reply);
 
     history.push({
       role: "assistant",
-      content: data.reply
+      content: reply
     });
 
-    messages.scrollTop = messages.scrollHeight;
-
   } catch (error) {
-
-    document.getElementById("typing").remove();
-
-    messages.innerHTML += `
-      <div class="auto-message bot-message">
-        Server error ❌
-      </div>
-    `;
+    typing.remove();
+    addMessage("bot", "Connection error ❌");
+    console.log(error);
   }
 }
 
 sendBtn.addEventListener("click", sendMessage);
 
 input.addEventListener("keypress", e => {
-  if (e.key === "Enter") {
-    sendMessage();
-  }
+  if (e.key === "Enter") sendMessage();
 });
 
 setTimeout(() => {
-
   const tooltip = document.getElementById("autoTooltip");
-
-  if (tooltip) {
-    tooltip.remove();
-  }
-
+  if (tooltip) tooltip.remove();
 }, 7000);
