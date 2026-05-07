@@ -23,18 +23,15 @@
   animation:logoFloat 2.5s ease-in-out infinite;
 }
 
-.auto-chatbot-button img.main-chatbot-logo{
-  width:150px !important;
-  height:150px !important;
+.auto-chatbot-button img{
+  width:110px !important;
+  height:auto !important;
   object-fit:contain !important;
-  display:block !important;
+
   background:transparent !important;
   border:none !important;
   box-shadow:none !important;
-  filter:drop-shadow(0 0 12px rgba(255,0,0,.85))
-         drop-shadow(0 0 30px rgba(255,0,0,.5));
 }
-
 .auto-chatbot-button::before,
 .auto-chatbot-button::after{
   display:none !important;
