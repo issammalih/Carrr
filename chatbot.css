@@ -3,180 +3,112 @@
   --gray:#9ca3af;
 }
 
-/* =========================
-   CHATBOT LOGO BUTTON
-========================= */
-
 .auto-chatbot-button{
   position:fixed;
-  right:20px;
-  bottom:20px;
-
-  width:115px;
-  height:115px;
-
+  right:18px;
+  bottom:18px;
+  width:150px;
+  height:150px;
   z-index:999999;
   cursor:pointer;
-
   background:transparent !important;
   border:none !important;
   box-shadow:none !important;
-
   padding:0;
   margin:0;
   overflow:visible;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   animation:logoFloat 2.5s ease-in-out infinite;
 }
 
-.auto-chatbot-button img,
-.main-chatbot-logo{
-  width:115px !important;
-  height:115px !important;
-
+.auto-chatbot-button img.main-chatbot-logo{
+  width:150px !important;
+  height:150px !important;
   object-fit:contain !important;
-
   display:block !important;
-
   background:transparent !important;
   border:none !important;
   box-shadow:none !important;
-
-  filter:
-    drop-shadow(0 0 10px rgba(255,0,0,.8))
-    drop-shadow(0 0 28px rgba(255,0,0,.45));
+  filter:drop-shadow(0 0 12px rgba(255,0,0,.85))
+         drop-shadow(0 0 30px rgba(255,0,0,.5));
 }
 
-/* disable old pseudo logo */
-.auto-chatbot-button::before{
+.auto-chatbot-button::before,
+.auto-chatbot-button::after{
   display:none !important;
   content:none !important;
 }
 
-/* =========================
-   NOTIFICATION
-========================= */
-
 .auto-chatbot-notification{
   position:absolute;
-
-  top:6px;
-  right:4px;
-
+  top:18px;
+  right:12px;
   width:24px;
   height:24px;
-
   border-radius:50%;
-
   background:#ff2020;
   color:white;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   font-size:12px;
   font-weight:700;
-
   box-shadow:0 0 14px rgba(255,0,0,.85);
-
   animation:notifAnim 1.2s infinite;
 }
 
-/* =========================
-   TOOLTIP
-========================= */
-
 .auto-chatbot-tooltip{
   position:fixed;
-
-  right:150px;
-  bottom:48px;
-
+  right:165px;
+  bottom:55px;
   background:#0d0d12;
   color:white;
-
   padding:12px 18px;
-
   border-radius:14px;
-
   border:1px solid rgba(255,32,32,.3);
-
   font-size:14px;
   font-weight:700;
-
   z-index:999999;
-
   opacity:0;
-
   animation:tooltipAnim 7s forwards;
-
   box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
 
-/* =========================
-   CHAT WINDOW
-========================= */
-
 .auto-chatbot{
   position:fixed;
-
   right:25px;
-  bottom:135px;
-
+  bottom:155px;
   width:390px;
   max-width:calc(100vw - 30px);
-
   height:600px;
-
   background:linear-gradient(180deg,#0d0d11,#050507);
-
   border-radius:28px;
-
   overflow:hidden;
-
   z-index:999999;
-
   border:1px solid rgba(255,32,32,.2);
-
   box-shadow:0 25px 70px rgba(0,0,0,.7);
-
   display:none;
-
   flex-direction:column;
 }
 
-/* =========================
-   HEADER
-========================= */
-
 .auto-chatbot-header{
   background:linear-gradient(135deg,#15151c,#08080a);
-
   padding:18px;
-
   display:flex;
   align-items:center;
-
   gap:14px;
-
   border-bottom:1px solid rgba(255,32,32,.12);
 }
 
 .auto-chatbot-header img{
   width:90px;
   height:auto;
-
   object-fit:contain;
-
   background:transparent !important;
   border:none !important;
   box-shadow:none !important;
-
   filter:drop-shadow(0 0 10px rgba(255,0,0,.4));
 }
 
@@ -198,10 +130,6 @@
   cursor:pointer;
   font-size:24px;
 }
-
-/* =========================
-   MESSAGES
-========================= */
 
 .auto-chatbot-messages{
   flex:1;
@@ -232,10 +160,6 @@
   color:white;
   align-self:flex-end;
 }
-
-/* =========================
-   INPUT
-========================= */
 
 .auto-chatbot-input{
   padding:16px;
@@ -270,54 +194,23 @@
   transform:scale(1.05);
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
-
 @keyframes logoFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-5px);
-  }
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-5px);}
 }
 
 @keyframes notifAnim{
-  0%,100%{
-    transform:scale(1);
-  }
-
-  50%{
-    transform:scale(1.25);
-  }
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.25);}
 }
 
 @keyframes tooltipAnim{
-  0%{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  15%,80%{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-  100%{
-    opacity:0;
-  }
+  0%{opacity:0;transform:translateY(10px);}
+  15%,80%{opacity:1;transform:translateY(0);}
+  100%{opacity:0;}
 }
 
 @keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
 }
