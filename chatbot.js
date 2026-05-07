@@ -6,7 +6,14 @@ const chatbotHTML = `
 </div>
 
 <div class="auto-chatbot-button" id="chatbotButton">
+
+  <img
+  src="https://i.postimg.cc/Vv5Wpc4P/Chat-GPT-Image-6-mai-2026-20-32-38.png"
+  alt="chatbot-logo"
+  class="main-chatbot-logo">
+
   <div class="auto-chatbot-notification">1</div>
+
 </div>
 
 <div class="auto-chatbot" id="autoChatbot">
