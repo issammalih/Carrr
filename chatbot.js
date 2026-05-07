@@ -8,9 +8,10 @@ const chatbotHTML = `
 </div>
 
 <div class="auto-chatbot-button" id="chatbotButton">
-  <img src="${CHATBOT_LOGO}" alt="chatbot-logo" class="main-chatbot-logo">
-  <div class="auto-chatbot-notification">1</div>
-</div>
+  <img
+src="https://i.postimg.cc/KvvrrjZC/Chat-GPT-Image-7-mai-2026-11-43-28.png"
+alt="chatbot-logo"
+class="main-chatbot-logo">
 
 <div class="auto-chatbot" id="autoChatbot">
   <div class="auto-chatbot-header">
