@@ -1,6 +1,6 @@
 const workerUrl = "https://carschatbojdid.issammalyh2.workers.dev";
 
-const CHATBOT_LOGO = "https://i.postimg.cc/0yfdkfjC/Chat-GPT-Image-6-mai-2026-22-42-41.png";
+const CHATBOT_LOGO = "https://i.postimg.cc/KvvrrjZC/Chat-GPT-Image-7-mai-2026-11-43-28.png";
 
 const chatbotHTML = `
 <div class="auto-chatbot-tooltip" id="autoTooltip">
